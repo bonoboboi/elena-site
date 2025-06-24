@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>About Elena Bulatova</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Hina+Mincho&family=Roboto+Flex:opsz,wght@8..144,100..1000&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="EleFavi.ico" type="image/x-icon">
+</head>
+<body>
+  <img src="images/skyscraper1.jpg" alt="Skyscraper Left" class="skyscraper skyscraper-left">
+  <img src="images/skyscraper2.jpg" alt="Skyscraper Right" class="skyscraper skyscraper-right">
+  <div class="main-content">
+    <header>
+      <h1>About & Contact</h1>
+    </header>
+    <section class="about">
+      <img src="images/a1.jpg" alt="Elena Bulatova" class="artist-photo">
+      <div class="about-text">
+        <div style="margin-bottom: 1em;">
+          <button id="en-btn" class="mincho-link lang-btn" style="margin-right:10px;">English</button>
+          <button id="de-btn" class="mincho-link lang-btn">Deutsch</button>
+        </div>
+        <div id="about-en">
+          <p>
+            I understand painting as a practice of the inner experience of the world. Nature is not simply landscape to me but a living space in which humans exist as part of a whole. I strive to express this feeling of connection, warmth and spirituality through image, color and texture.
+          </p>
+          <p>
+            My works emerge from observation but do not seek mere representation. I search for my own language to make visible the fragile, the mutable, and at the same time the eternal in nature and in humanity. The tradition of the Russian school of painting inspires me, yet I combine it with a personal, free perspective.
+          </p>
+          <p>
+            The canvas is for me a living surface, like a fabric or a tapestry through which the breath of color shines. The structure and direction of the brushstroke carry meaning.
+          </p>
+          <p>
+            My creative process always unfolds differently: sometimes clearly planned, sometimes intuitive. Sometimes the decision comes suddenly, in the moment when the mind falls silent and the painting itself begins to speak.
+          </p>
+          <hr>
+          <div class="cv">
+            <strong>Artist CV</strong><br><br>
+            <strong>Name:</strong> Elena Bulatova<br>
+            <strong>Location:</strong> Munich, Germany<br><br>
+            <strong>Professional Experience</strong><br>
+            &bull; 10 years of artistic practice<br><br>
+            <strong>Education</strong><br>
+            &bull; Private art workshops and master classes in Russia and Europe<br>
+            &bull; External student at the AbdK<br><br>
+            <strong>Selected Exhibitions</strong><br>
+            &bull; Artlokal Viktualien Markt, Munich 2020, 2021<br>
+            &bull; Kunst im Karree, Munich 2020, 2024<br>
+            &bull; Yearly Exhibition at the AbdK <br>
+            &bull; ArtMuc 2025
+          </div>
+        </div>
+        <div id="about-de" style="display:none;">
+          <p>
+            Ich verstehe Malerei als eine Praxis des inneren Erlebens der Welt. Die Natur ist für mich nicht einfach Landschaft, sondern ein lebendiger Raum, in dem der Mensch als Teil eines Ganzen existiert. Dieses Gefühl von Verbundenheit, Wärme und Spiritualität versuche ich durch Bild, Farbe und Textur auszudrücken.
+          </p>
+          <p>
+            Meine Arbeiten entstehen aus dem Beobachten, streben aber nicht nach bloßer Abbildung. Ich suche eine eigene Sprache, um das Zerbrechliche, Wandelbare, und zugleich das Ewige in der Natur und im Menschen sichtbar zu machen. Die Tradition der russischen Malschule inspiriert mich, doch ich kombiniere sie mit einem persönlichen, freien Blick.
+          </p>
+          <p>
+            Die Leinwand ist für mich eine lebendige Oberfläche, wie ein Gewebe, ein Teppich, durch den das Atmen der Farbe hindurchscheint. Struktur und Richtung des Pinselstrichs tragen die Bedeutung mit.
+          </p>
+          <p>
+            Der Schaffensprozess verläuft bei mir immer unterschiedlich: mal klar geplant, mal intuitiv. Manchmal kommt die Entscheidung plötzlich, in dem Moment, wenn der Verstand schweigt und das Bild selbst zu sprechen beginnt.
+          </p>
+          <hr>
+          <div class="cv">
+            <strong>Künstlerlebenslauf</strong><br><br>
+            <strong>Name:</strong> Elena Bulatova<br>
+            <strong>Ort:</strong> München, Deutschland<br><br>
+            <strong>Berufserfahrung</strong><br>
+            &bull; 10 Jahre künstlerische Tätigkeit<br><br>
+            <strong>Ausbildung</strong><br>
+            &bull; Private Kunstwerkstätten und Meisterkurse in Russland und Europa<br>
+            &bull; Externer Student an der AbdK<br><br>
+            <strong>Ausgewählte Ausstellungen</strong><br>
+            &bull; Artlokal Viktualien Markt, München 2020, 2021<br>
+            &bull; Kunst im Karree, München 2020, 2024<br>
+            &bull; Jahresausstellung im AbdK <br>
+            &bull; ArtMuc 2025
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="contact">
+      <h2>Contact</h2>
+      <p>
+        For inquiries, commissions, or collaborations, please email:<br>
+        <a href="elena.gaydar@gmail.com" class="mincho-link">elena.gaydar@gmail.com</a>
+      </p>
+    </section>
+    <p><a href="index.html" class="mincho-link">← Back to Portfolio</a></p>
+  </div>
+  <script>
+  document.getElementById('en-btn').onclick = function() {
+    document.getElementById('about-en').style.display = '';
+    document.getElementById('about-de').style.display = 'none';
+  };
+  document.getElementById('de-btn').onclick = function() {
+    document.getElementById('about-en').style.display = 'none';
+    document.getElementById('about-de').style.display = '';
+  };
+  </script>
+  <style>
+    .lang-btn {
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0;
+      font-size: 1em;
+    }
+    .lang-btn:focus {
+      outline: none;
+      text-decoration: underline;
+    }
+  </style>
+</body>
+</html>
