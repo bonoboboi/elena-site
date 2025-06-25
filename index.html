@@ -10,219 +10,221 @@
   <link rel="icon" href="EleFavi.ico" type="image/x-icon">
 </head>
 <body>
-  <img src="images/skyscraper1.jpg" alt="Skyscraper Left" class="skyscraper skyscraper-left">
-  <img src="images/ababa.jpg" alt="Skyscraper Right" class="skyscraper skyscraper-right">
+  <div class="main-content">
+    <header>
+      <div style="display: flex; justify-content: center; gap: 2em; align-items: center; margin-bottom: 1em;">
+        <h3 style="margin:0;"><a href="about.html" class="mincho-link">About & Contact</a></h3>
+        <h3 style="margin:0;"><a href="https://www.instagram.com/elena_bulatova55?igsh=ZjZwYml3ZG9pYng1&utm_source=qr" class="mincho-link" target="_blank" rel="noopener">My Instagram</a></h3>
+      </div>
+      <h1>Elena Bulatova</h1>
+    </header>
 
-  <header>
-    <h3><a href="about.html" class="mincho-link">About & Contact</a></h3>
-    <h1>Elena Bulatova</h1>
-  </header>
-
-  <main class="gallery">
-    <div class="selector" style="display:flex; gap:20px; justify-content:center; margin-bottom:20px;">
-      <h2 id="tab-oil" onclick="showSection('oil')" class="active" style="cursor:pointer;">Oil on Canvas</h2>
-      <h2 id="tab-graphic" onclick="showSection('graphic')" style="cursor:pointer; opacity:0.4;">Graphic Works</h2>
-    </div>
-
-    <div id="sections-container">
-      <div id="oil" class="artwork-section">
-        <h2>Oil on Canvas</h2>
-        <img src="images/temp_separator.jpg" alt="Separator Image" class="separator">
-        <div class="artwork-group">
-          <section class="artwork">
-            <img src="images/1.jpg" alt="Description of painting 1">
-            <h3>Werdenberg, Switzerland</h3>
-            35x45 cm, Oil on Canvas - Painted in 2024 in Werdenberg, Switzerland on location. <br><br>
-            <strong>Alpenseen. Eine Landschaftsserie</strong><br>
-            <p>
-              Diese Werkreihe ist der Natur der Alpen und der besonderen Stimmung alpiner Seenlandschaften gewidmet. Sie entstand aus Eindrücken und Beobachtungen während meiner Reisen in die Berge, gemalt im frühen Sommer dieses Jahres und teilweise auch im letzten Sommer. In diesen Bildern habe ich versucht, nicht nur die Motive selbst, Spiegelungen im Wasser, Silhouetten der Berge, das Spiel des Lichts auf der Architektur, festzuhalten, sondern auch die Stille, Weite und das atmende Wesen der Natur spürbar zu machen.
-            </p>
-            <p>
-              Die Gemälde sind in realistischer Malweise mit einem impressionistischen Gefühl für Licht und Farbe entstanden. Sie verbindet das Streben, die lebendige Präsenz der Natur und die emotionale Atmosphäre eines konkreten Ortes einzufangen, sei es ein Bergsee, ein Dorf am Hang oder ein stilles Tal unter dem Schnee.
-            </p>
-          </section>
-          <section class="artwork">
-            <img src="images/2.jpg" alt="Description of painting 2">
-            <h3>Summer Echo</h3>
-            <p>32x42 cm, Oil on Canvas - Painted in 2024 on location (location unknown).</p>
-          </section>
-          <section class="artwork">
-            <img src="images/3.jpg" alt="Description of painting 3">
-            <h3>Cascade Light</h3>
-            <p>40x50 cm, Oil on Canvas - Painted in 2025 on location.</p>
-          </section>
-          <section class="artwork">
-            <img src="images/4.jpg" alt="Description of painting 4">
-            <h3>Untitled Meadow Motif</h3>
-            <p>29x29cm, Oil on Canvas - Painted in 2024 on location.</p>
-          </section>
-          <section class="artwork">
-            <img src="images/5.jpg" alt="Description of painting 5">
-            <h3>Under the Clouds</h3>
-            <p>15x15cm, Oil on Canvas - Painted in 2025 on location.</p>
-            <section class="artwork">
-            <img src="images/6.jpg" alt="Description of painting 6">
-            <h3>View of Lake Lugano</h3>
-            <p>30x25cm, Oil on Canvas - Painted in 2025 on location.</p>
-            </section>
-            <section class="artwork">
-            <img src="images/8.jpg" alt="Description of painting 8">
-            <h3>Alpine Reflection</h3>
-            <p>30x40cm, Oil on Canvas - Painted in 2025 on location.</p>
-            </section>
-            <section class="artwork">
-            <img src="images/9.jpg" alt="Description of painting 9">
-            <h3>Cypress Trees and Lake</h3>
-            <p>24x30cm, Oil on Canvas - Painted in 2025 on location.</p>
-            </section>
-            <section class="artwork">
-            <img src="images/10.jpg" alt="Description of painting 10">
-            <h3>Lugano Lake and Hamlet</h3>
-            <p>40x30cm, Oil on Canvas - Painted in 2025 on location</p>
-            </section>
-            <section class="artwork">
-            <img src="images/11.jpg" alt="Description of painting 11">
-            <h3>Yellow Meadow</h3>
-            <p>30x40cm, Oil on Canvas - Painted in 2025 on location.</p>
-            </section>
-            <section class="artwork">
-            <img src="images/12.jpg" alt="Description of painting 12">
-            <h3>Green Meadow</h3>
-            <p>30x40cm, Oil on Canvas - Painted in 2025 on location.</p>
-            </section>
-            <section class="artwork">
-            <img src="images/13.jpg" alt="Description of painting 13">
-            <h3>Clouds 1</h3>
-            <p>25x50cm, Oil on Canvas - Painted in 2024 on location.</p>
-            </section>
-            <section class="artwork">
-            <img src="images/14.jpg" alt="Description of painting 14">
-            <h3>Birch Path</h3>
-            <p>30x40cm, Oil on Canvas - Painted in 2024 on location.</p>
-            </section>
-            <section class="artwork">
-            <img src="images/15.jpg" alt="Description of painting 15">
-            <h3>Gravel Road</h3>
-            <p>30x40cm, Oil on Canvas - Painted in 2024 on location.</p>
-            </section>
-        </div>
+    <main class="gallery">
+      <div class="selector" style="display:flex; gap:20px; justify-content:center; margin-bottom:20px;">
+        <h2 id="tab-oil" onclick="showSection('oil')" class="active" style="cursor:pointer;">Oil on Canvas</h2>
+        <h2 id="tab-graphic" onclick="showSection('graphic')" style="cursor:pointer; opacity:0.4;">Graphic Works</h2>
       </div>
 
-      <div id="graphic" class="artwork-section">
-        <h2>Graphic Works</h2>
-        <img src="images/temp_separator.jpg" alt="Separator Image" class="separator">
-        <div class="artwork-group">
-          <section class="artwork">
-            <img src="images/g1.jpg" alt="Description of painting g1">
-            <h3>Untitled (1 - Yellow)</h3>
-            <p>A4 Format - Mixed techniques, Oil on Photo Paper</p>
-          </section>
-          <section class="artwork">
-            <img src="images/g2.jpg" alt="Description of painting g2">
-            <h3>Untitled (2 - Blue)</h3>
-            <p>A4 Format - Mixed techniques, Oil on Photo Paper</p>
-          </section>
-          <section class="artwork">
-            <img src="images/g3.jpg" alt="Description of painting g3">
-            <h3>Untitled (3 - Yellow)</h3>
-            <p>A4 Format - Mixed techniques, Oil on Photo Paper</p>
-          </section>
-          <section class="artwork">
-            <img src="images/t1.jpg" alt="Description of painting t1">
-            <h3>Tango (1 - Red/White)</h3>
-            <p>A4 Format - Mixed techniques, Oil on Photo Paper</p>
-          </section>
-          <section class="artwork">
-            <img src="images/t2.jpg" alt="Description of painting t2">
-            <h3>Tango (2 - Iodine)</h3>
-            <p>A4 Format - Mixed techniques, Oil on Photo Paper</p>
-          </section>
-          <section class="artwork">
-            <img src="images/t3.jpg" alt="Description of painting t3">
-            <h3>Tango (3 - Orange/Blue)</h3>
-            <p>A4 Format - Mixed techniques, Oil on Photo Paper</p>
-          </section>
-          <section class="artwork">
-            <img src="images/t4.jpg" alt="Description of painting t4">
-            <h3>Tango (4 - Baby Blue)</h3>
-            <p>A4 Format - Mixed techniques, Oil on Photo Paper</p>
-          </section>
-          <section class="artwork">
-            <img src="images/t5.jpg" alt="Description of painting t5">
-            <h3>Tango (5 - Yellow/Blue)</h3>
-            <p>A4 Format - Mixed techniques, Oil on Photo Paper</p>
-          </section>
-          <section class="artwork">
-            <img src="images/t6.jpg" alt="Description of painting t6">
-            <h3>Tango (6 - Pink/Blue)</h3>
-            <p>A4 Format - Mixed techniques, Oil on Photo Paper</p>
-          </section>
-          <section class="artwork">
-            <img src="images/t7.jpg" alt="Description of painting t7">
-            <h3>Tango, a Waiter (7 - Blue/White)</h3>
-            <p>A4 Format - Mixed techniques, Oil on Photo Paper</p>
-          </section>
-          <section class="artwork">
-            <img src="images/t8.jpg" alt="Description of painting t8">
-            <h3>Tango (8 - Silver)</h3>
-            <p>A4 Format - Mixed techniques, Oil on Photo Paper</p>
-          </section>
+      <div id="sections-container">
+        <div id="oil" class="artwork-section">
+          <h2>Oil on Canvas</h2>
+          <img src="images/temp_separator.jpg" alt="Separator Image" class="separator">
+          <div class="artwork-group">
+            <section class="artwork">
+              <img src="images/1.jpg" alt="Description of painting 1">
+              <h3>Werdenberg, Switzerland</h3>
+              35x45 cm, Oil on Canvas - Painted in 2024 in Werdenberg, Switzerland on location. <br><br>
+              <strong>Alpenseen. Eine Landschaftsserie</strong><br>
+              <p>
+                Diese Werkreihe ist der Natur der Alpen und der besonderen Stimmung alpiner Seenlandschaften gewidmet. Sie entstand aus Eindrücken und Beobachtungen während meiner Reisen in die Berge, gemalt im frühen Sommer dieses Jahres und teilweise auch im letzten Sommer. In diesen Bildern habe ich versucht, nicht nur die Motive selbst, Spiegelungen im Wasser, Silhouetten der Berge, das Spiel des Lichts auf der Architektur, festzuhalten, sondern auch die Stille, Weite und das atmende Wesen der Natur spürbar zu machen.
+              </p>
+              <p>
+                Die Gemälde sind in realistischer Malweise mit einem impressionistischen Gefühl für Licht und Farbe entstanden. Sie verbindet das Streben, die lebendige Präsenz der Natur und die emotionale Atmosphäre eines konkreten Ortes einzufangen, sei es ein Bergsee, ein Dorf am Hang oder ein stilles Tal unter dem Schnee.
+              </p>
+            </section>
+            <section class="artwork">
+              <img src="images/2.jpg" alt="Description of painting 2">
+              <h3>Summer Echo</h3>
+              <p>32x42 cm, Oil on Canvas - Painted in 2024 on location (location unknown).</p>
+            </section>
+            <section class="artwork">
+              <img src="images/3.jpg" alt="Description of painting 3">
+              <h3>Cascade Light</h3>
+              <p>40x50 cm, Oil on Canvas - Painted in 2025 on location.</p>
+            </section>
+            <section class="artwork">
+              <img src="images/4.jpg" alt="Description of painting 4">
+              <h3>Untitled Meadow Motif</h3>
+              <p>29x29cm, Oil on Canvas - Painted in 2024 on location.</p>
+            </section>
+            <section class="artwork">
+              <img src="images/5.jpg" alt="Description of painting 5">
+              <h3>Under the Clouds</h3>
+              <p>15x15cm, Oil on Canvas - Painted in 2025 on location.</p>
+              <section class="artwork">
+              <img src="images/6.jpg" alt="Description of painting 6">
+              <h3>View of Lake Lugano</h3>
+              <p>30x25cm, Oil on Canvas - Painted in 2025 on location.</p>
+              </section>
+              <section class="artwork">
+              <img src="images/8.jpg" alt="Description of painting 8">
+              <h3>Alpine Reflection</h3>
+              <p>30x40cm, Oil on Canvas - Painted in 2025 on location.</p>
+              </section>
+              <section class="artwork">
+              <img src="images/9.jpg" alt="Description of painting 9">
+              <h3>Cypress Trees and Lake</h3>
+              <p>24x30cm, Oil on Canvas - Painted in 2025 on location.</p>
+              </section>
+              <section class="artwork">
+              <img src="images/10.jpg" alt="Description of painting 10">
+              <h3>Lugano Lake and Hamlet</h3>
+              <p>40x30cm, Oil on Canvas - Painted in 2025 on location</p>
+              </section>
+              <section class="artwork">
+              <img src="images/11.jpg" alt="Description of painting 11">
+              <h3>Yellow Meadow</h3>
+              <p>30x40cm, Oil on Canvas - Painted in 2025 on location.</p>
+              </section>
+              <section class="artwork">
+              <img src="images/12.jpg" alt="Description of painting 12">
+              <h3>Green Meadow</h3>
+              <p>30x40cm, Oil on Canvas - Painted in 2025 on location.</p>
+              </section>
+              <section class="artwork">
+              <img src="images/13.jpg" alt="Description of painting 13">
+              <h3>Clouds 1</h3>
+              <p>25x50cm, Oil on Canvas - Painted in 2024 on location.</p>
+              </section>
+              <section class="artwork">
+              <img src="images/14.jpg" alt="Description of painting 14">
+              <h3>Birch Path</h3>
+              <p>30x40cm, Oil on Canvas - Painted in 2024 on location.</p>
+              </section>
+              <section class="artwork">
+              <img src="images/15.jpg" alt="Description of painting 15">
+              <h3>Gravel Road</h3>
+              <p>30x40cm, Oil on Canvas - Painted in 2024 on location.</p>
+              </section>
+          </div>
+        </div>
+
+        <div id="graphic" class="artwork-section">
+          <h2>Graphic Works</h2>
+          <img src="images/temp_separator.jpg" alt="Separator Image" class="separator">
+          <div class="artwork-group">
+            <section class="artwork">
+              <img src="images/g1.jpg" alt="Description of painting g1">
+              <h3>Untitled (1 - Yellow)</h3>
+              <p>A4 Format - Mixed techniques, Oil on Photo Paper</p>
+            </section>
+            <section class="artwork">
+              <img src="images/g2.jpg" alt="Description of painting g2">
+              <h3>Untitled (2 - Blue)</h3>
+              <p>A4 Format - Mixed techniques, Oil on Photo Paper</p>
+            </section>
+            <section class="artwork">
+              <img src="images/g3.jpg" alt="Description of painting g3">
+              <h3>Untitled (3 - Yellow)</h3>
+              <p>A4 Format - Mixed techniques, Oil on Photo Paper</p>
+            </section>
+            <section class="artwork">
+              <img src="images/t1.jpg" alt="Description of painting t1">
+              <h3>Tango (1 - Red/White)</h3>
+              <p>A4 Format - Mixed techniques, Oil on Photo Paper</p>
+            </section>
+            <section class="artwork">
+              <img src="images/t2.jpg" alt="Description of painting t2">
+              <h3>Tango (2 - Iodine)</h3>
+              <p>A4 Format - Mixed techniques, Oil on Photo Paper</p>
+            </section>
+            <section class="artwork">
+              <img src="images/t3.jpg" alt="Description of painting t3">
+              <h3>Tango (3 - Orange/Blue)</h3>
+              <p>A4 Format - Mixed techniques, Oil on Photo Paper</p>
+            </section>
+            <section class="artwork">
+              <img src="images/t4.jpg" alt="Description of painting t4">
+              <h3>Tango (4 - Baby Blue)</h3>
+              <p>A4 Format - Mixed techniques, Oil on Photo Paper</p>
+            </section>
+            <section class="artwork">
+              <img src="images/t5.jpg" alt="Description of painting t5">
+              <h3>Tango (5 - Yellow/Blue)</h3>
+              <p>A4 Format - Mixed techniques, Oil on Photo Paper</p>
+            </section>
+            <section class="artwork">
+              <img src="images/t6.jpg" alt="Description of painting t6">
+              <h3>Tango (6 - Pink/Blue)</h3>
+              <p>A4 Format - Mixed techniques, Oil on Photo Paper</p>
+            </section>
+            <section class="artwork">
+              <img src="images/t7.jpg" alt="Description of painting t7">
+              <h3>Tango, a Waiter (7 - Blue/White)</h3>
+              <p>A4 Format - Mixed techniques, Oil on Photo Paper</p>
+            </section>
+            <section class="artwork">
+              <img src="images/t8.jpg" alt="Description of painting t8">
+              <h3>Tango (8 - Silver)</h3>
+              <p>A4 Format - Mixed techniques, Oil on Photo Paper</p>
+            </section>
+          </div>
         </div>
       </div>
-    </div>
-  </main>
+    </main>
 
-  <script>
-    function showSection(first) {
-      const oil = document.getElementById('oil');
-      const graphic = document.getElementById('graphic');
-      const container = document.getElementById('sections-container');
-      const oilTab = document.getElementById('tab-oil');
-      const graphicTab = document.getElementById('tab-graphic');
+    <script>
+      function showSection(first) {
+        const oil = document.getElementById('oil');
+        const graphic = document.getElementById('graphic');
+        const container = document.getElementById('sections-container');
+        const oilTab = document.getElementById('tab-oil');
+        const graphicTab = document.getElementById('tab-graphic');
 
-      if (oil && oil.parentElement) oil.remove();
-      if (graphic && graphic.parentElement) graphic.remove();
+        if (oil && oil.parentElement) oil.remove();
+        if (graphic && graphic.parentElement) graphic.remove();
 
-      oilTab.classList.toggle('active', first === 'oil');
-      graphicTab.classList.toggle('active', first === 'graphic');
-      oilTab.style.opacity = first === 'oil' ? '1' : '0.4';
-      graphicTab.style.opacity = first === 'graphic' ? '1' : '0.4';
+        oilTab.classList.toggle('active', first === 'oil');
+        graphicTab.classList.toggle('active', first === 'graphic');
+        oilTab.style.opacity = first === 'oil' ? '1' : '0.4';
+        graphicTab.style.opacity = first === 'graphic' ? '1' : '0.4';
 
-      if (first === 'oil') {
-        container.appendChild(oil);
-        container.appendChild(graphic);
-      } else {
-        container.appendChild(graphic);
-        container.appendChild(oil);
+        if (first === 'oil') {
+          container.appendChild(oil);
+          container.appendChild(graphic);
+        } else {
+          container.appendChild(graphic);
+          container.appendChild(oil);
+        }
       }
-    }
 
-    window.addEventListener('DOMContentLoaded', () => showSection('oil'));
-  </script>
+      window.addEventListener('DOMContentLoaded', () => showSection('oil'));
+    </script>
 
-  <footer>
-    <h3><a href="impressum.html" class="mincho-link">Impressum</a></h3>
-  </footer>
+    <footer>
+      <h3><a href="impressum.html" class="mincho-link">Impressum</a></h3>
+    </footer>
 
-  <div id="lightbox-modal" style="display:none;position:fixed;z-index:1000;top:0;left:0;width:100vw;height:100vh;background:rgba(0,0,0,0.85);justify-content:center;align-items:center;">
-    <img id="lightbox-img" src="" alt="Expanded artwork" style="max-width:90vw;max-height:90vh;border-radius:10px;box-shadow:0 2px 16px rgba(0,0,0,0.3);">
-  </div>
+    <div id="lightbox-modal" style="display:none;position:fixed;z-index:1000;top:0;left:0;width:100vw;height:100vh;background:rgba(0,0,0,0.85);justify-content:center;align-items:center;">
+      <img id="lightbox-img" src="" alt="Expanded artwork" style="max-width:90vw;max-height:90vh;border-radius:10px;box-shadow:0 2px 16px rgba(0,0,0,0.3);">
+    </div>
 
-  <script>
-    document.querySelectorAll('.artwork img').forEach(img => {
-      img.style.cursor = 'pointer';
-      img.addEventListener('click', function() {
-        document.getElementById('lightbox-img').src = this.src;
-        document.getElementById('lightbox-modal').style.display = 'flex';
+    <script>
+      document.querySelectorAll('.artwork img').forEach(img => {
+        img.style.cursor = 'pointer';
+        img.addEventListener('click', function() {
+          document.getElementById('lightbox-img').src = this.src;
+          document.getElementById('lightbox-modal').style.display = 'flex';
+        });
       });
-    });
 
-    document.getElementById('lightbox-modal').addEventListener('click', function(e) {
-      if (e.target === this) {
-        this.style.display = 'none';
-        document.getElementById('lightbox-img').src = '';
-      }
-    });
-  </script>
+      document.getElementById('lightbox-modal').addEventListener('click', function(e) {
+        if (e.target === this) {
+          this.style.display = 'none';
+          document.getElementById('lightbox-img').src = '';
+        }
+      });
+    </script>
+  </div>
 </body>
 </html>
