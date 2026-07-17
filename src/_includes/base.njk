@@ -4,15 +4,19 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>{{ title }}</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Hina+Mincho&family=Roboto+Flex:opsz,wght@8..144,100..1000&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/style.css">
+  <link rel="stylesheet" href="{{ '/fonts/fonts.css' | bust }}">
+  <link rel="stylesheet" href="{{ '/style.css' | bust }}">
   <link rel="icon" href="/EleFavi.ico" type="image/x-icon">
 </head>
 <body>
   <div class="main-content">
     {{ content | safe }}
+
+    <footer class="legal-footer">
+      <a href="/impressum/" class="mincho-link">Impressum</a>
+      <a href="/datenschutz/" class="mincho-link">Datenschutz</a>
+      <a href="/widerruf/" class="mincho-link">Widerrufsrecht</a>
+    </footer>
   </div>
 </body>
 </html>

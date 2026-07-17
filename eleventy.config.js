@@ -1,9 +1,12 @@
 import markdownIt from "markdown-it";
+import fs from "node:fs";
+import crypto from "node:crypto";
 
 const md = markdownIt({ html: true, breaks: false, linkify: true });
 
 export default function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy("src/images");
+  eleventyConfig.addPassthroughCopy("src/fonts");
   eleventyConfig.addPassthroughCopy("src/style.css");
   eleventyConfig.addPassthroughCopy("src/EleFavi.ico");
   // keeps the old .html URLs alive; they're in her Instagram bio and Google's index
@@ -11,6 +14,18 @@ export default function (eleventyConfig) {
 
   // renders the CMS's rich-text fields; mom writes prose, never HTML
   eleventyConfig.addFilter("markdown", (str) => (str ? md.render(str) : ""));
+
+  // Cloudflare Pages serves CSS with max-age=14400 but HTML with max-age=0, so for
+  // 4h after a deploy browsers pair new HTML with stale CSS. Hashing the URL makes
+  // changed files a different URL, so that can't happen.
+  eleventyConfig.addFilter("bust", (url) => {
+    const hash = crypto
+      .createHash("md5")
+      .update(fs.readFileSync(`src${url}`))
+      .digest("hex")
+      .slice(0, 8);
+    return `${url}?v=${hash}`;
+  });
 
   return {
     dir: { input: "src", output: "_site", data: "../content" },

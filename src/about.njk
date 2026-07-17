@@ -11,7 +11,7 @@ permalink: /about/
   <img src="{{ site.portrait }}" alt="Elena Bulatova" class="artist-photo">
   <div class="about-text">
     <div class="lang-switch">
-      <button class="mincho-link lang-btn" data-lang="en">English</button>
+      <button class="mincho-link lang-btn active" data-lang="en">English</button>
       <button class="mincho-link lang-btn" data-lang="de">Deutsch</button>
     </div>
 
@@ -40,6 +40,9 @@ permalink: /about/
     btn.addEventListener('click', () => {
       document.querySelectorAll('.lang-pane').forEach(pane => {
         pane.hidden = pane.dataset.lang !== btn.dataset.lang;
+      });
+      document.querySelectorAll('.lang-btn').forEach(b => {
+        b.classList.toggle('active', b === btn);
       });
     });
   });
