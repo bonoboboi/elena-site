@@ -1,0 +1,87 @@
+media:
+  - name: images
+    label: Photos
+    input: src/images
+    output: /images
+    extensions: [jpg, jpeg, png, webp]
+
+content:
+  - name: artworks
+    label: Artworks
+    path: content/artworks.json
+    type: file
+    icon: image
+    fields:
+      - name: items
+        label: Paintings
+        type: object
+        list:
+          min: 1
+        # shown as the row label in the CMS list, so she can find a painting
+        # without opening each one
+        fields:
+          - name: name
+            label: Title
+            type: string
+            required: true
+          - name: image
+            label: Photo
+            type: image
+            required: true
+            options:
+              media: images
+          - name: section
+            label: Section
+            type: select
+            required: true
+            default: oil
+            options:
+              values:
+                - { value: oil, label: Oil on Canvas }
+                - { value: graphic, label: Graphic Works }
+          - name: details
+            label: Size, medium, year
+            type: string
+            description: "e.g. 30x40cm, Oil on Canvas - Painted in 2025 on location."
+          - name: series
+            label: Series heading (optional)
+            type: string
+            description: Bold line above the long text. Leave empty for most paintings.
+          - name: description
+            label: Longer description (optional)
+            type: rich-text
+          - name: buy_link
+            label: Stripe payment link (optional)
+            type: string
+            description: Paste a Stripe Payment Link to show a "Buy this painting" button. Leave empty to hide it.
+
+  - name: site
+    label: About, CV & Contact
+    path: content/site.json
+    type: file
+    icon: user
+    fields:
+      - name: email
+        label: Contact email
+        type: string
+        required: true
+      - name: instagram
+        label: Instagram URL
+        type: string
+      - name: portrait
+        label: Portrait photo
+        type: image
+        options:
+          media: images
+      - name: about_en
+        label: About text (English)
+        type: rich-text
+      - name: cv_en
+        label: CV (English)
+        type: rich-text
+      - name: about_de
+        label: About text (Deutsch)
+        type: rich-text
+      - name: cv_de
+        label: CV (Deutsch)
+        type: rich-text

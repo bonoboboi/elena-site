@@ -298,3 +298,61 @@ a.button:hover {
   font-family: "Roboto Flex", sans-serif;
   font-size: 1em;
 }
+/* --- moved out of inline styles during the Eleventy conversion --- */
+
+[hidden] { display: none !important; }
+
+.topnav {
+  display: flex;
+  justify-content: center;
+  gap: 2em;
+  align-items: center;
+  margin-bottom: 1em;
+}
+.topnav h3 { margin: 0; }
+
+.selector {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+.selector h2 { cursor: pointer; }
+.selector h2:not(.active) { opacity: 0.4; }
+
+#lightbox-modal {
+  display: flex;
+  position: fixed;
+  z-index: 1000;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.85);
+  justify-content: center;
+  align-items: center;
+}
+#lightbox-img {
+  max-width: 90vw;
+  max-height: 90vh;
+  border-radius: 10px;
+  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.3);
+}
+
+.artist-photo { align-self: flex-start; margin-top: 0; margin-bottom: 0; }
+
+.lang-switch { margin-bottom: 1em; display: flex; gap: 10px; }
+.lang-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  font-size: 1em;
+}
+.lang-btn:focus { outline: none; text-decoration: underline; }
+
+.buy {
+  display: inline-block;
+  margin-top: 0.5em;
+  font-family: "Roboto Flex", sans-serif;
+}

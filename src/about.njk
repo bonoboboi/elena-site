@@ -1,0 +1,46 @@
+---
+layout: base.njk
+title: About Elena Bulatova
+permalink: /about/
+---
+<header>
+  <h1>About &amp; Contact</h1>
+</header>
+
+<section class="about">
+  <img src="{{ site.portrait }}" alt="Elena Bulatova" class="artist-photo">
+  <div class="about-text">
+    <div class="lang-switch">
+      <button class="mincho-link lang-btn" data-lang="en">English</button>
+      <button class="mincho-link lang-btn" data-lang="de">Deutsch</button>
+    </div>
+
+    {% for l in ["en", "de"] %}
+    <div class="lang-pane" data-lang="{{ l }}"{% if l == "de" %} hidden{% endif %}>
+      {{ site["about_" + l] | markdown | safe }}
+      <hr>
+      <div class="cv">{{ site["cv_" + l] | markdown | safe }}</div>
+    </div>
+    {% endfor %}
+  </div>
+</section>
+
+<section class="contact">
+  <h2>Contact</h2>
+  <p>
+    For inquiries, commissions, or collaborations, please email:<br>
+    <a href="mailto:{{ site.email }}" class="mincho-link">{{ site.email }}</a>
+  </p>
+</section>
+
+<p><a href="/" class="mincho-link">&larr; Back to Portfolio</a></p>
+
+<script>
+  document.querySelectorAll('.lang-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.lang-pane').forEach(pane => {
+        pane.hidden = pane.dataset.lang !== btn.dataset.lang;
+      });
+    });
+  });
+</script>
