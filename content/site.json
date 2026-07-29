@@ -2,70 +2,23 @@
   "email": "elena.gaydar@gmail.com",
   "instagram": "https://www.instagram.com/elena_bulatova55?igsh=ZjZwYml3ZG9pYng1&utm_source=qr",
   "portrait": "/images/temp_a1.jpg",
-  "about_en": "I understand painting as a practice of the inner experience of the world. Nature is not simply landscape to me but a living space in which humans exist as part of a whole. I strive to express this feeling of connection, warmth and spirituality through image, color and texture.\n\nMy works emerge from observation but do not seek mere representation. I search for my own language to make visible the fragile, the mutable, and at the same time the eternal in nature and in humanity. The tradition of the Russian school of painting inspires me, yet I combine it with a personal, free perspective.\n\nThe canvas is for me a living surface, like a fabric or a tapestry through which the breath of color shines. The structure and direction of the brushstroke carry meaning.\n\nMy creative process always unfolds differently: sometimes clearly planned, sometimes intuitive. Sometimes the decision comes suddenly, in the moment when the mind falls silent and the painting itself begins to speak.",
+  "about_en": "**The surface of my canvas is not a window onto the world; it is a world in itself.** It is a living space where colour, texture and brushstrokes create their own reality. Every mark carries direction, weight and meaning.\n\nI see painting as a search for the inner structure of the visible world rather than an imitation of appearances. Form emerges through relationships of colour, rhythm and space, while composition becomes an organic whole in which every element gains meaning through its connection with the others.\n\nI try to begin with observation but move beyond representation. I search for a visual language that reveals both the fragile and the enduring in nature and in human experience. The tradition of the Russian school of painting remains an important foundation of my practice.\n\n",
   "cv_en": "**Artist CV**\n\n**Name:** Elena Bulatova\n\n**Location:** Munich, Germany\n\n**Professional Experience**\n\n- 10 years of artistic practice\n\n**Education**\n\n- Private art workshops and master classes in Russia and Europe\n- External student at the AbdK\n\n**Selected Exhibitions**\n\n- Artlokal Viktualien Markt, Munich 2020, 2021\n- Kunst im Karree, Munich 2020, 2024\n- Yearly Exhibition at the AbdK München 2024\n- ArtMuc 2025\n- Kuboshow, Bochum 2025\n- Vernissage in Atelierhaus Berg 2026\n\n",
   "about_de": "Ich verstehe Malerei als eine Praxis des inneren Erlebens der Welt. Die Natur ist für mich nicht einfach Landschaft, sondern ein lebendiger Raum, in dem der Mensch als Teil eines Ganzen existiert. Dieses Gefühl von Verbundenheit, Wärme und Spiritualität versuche ich durch Bild, Farbe und Textur auszudrücken.\n\nMeine Arbeiten entstehen aus dem Beobachten, streben aber nicht nach bloßer Abbildung. Ich suche eine eigene Sprache, um das Zerbrechliche, Wandelbare, und zugleich das Ewige in der Natur und im Menschen sichtbar zu machen. Die Tradition der russischen Malschule inspiriert mich, doch ich kombiniere sie mit einem persönlichen, freien Blick.\n\nDie Leinwand ist für mich eine lebendige Oberfläche, wie ein Gewebe, ein Teppich, durch den das Atmen der Farbe hindurchscheint. Struktur und Richtung des Pinselstrichs tragen die Bedeutung mit.\n\nDer Schaffensprozess verläuft bei mir immer unterschiedlich: mal klar geplant, mal intuitiv. Manchmal kommt die Entscheidung plötzlich, in dem Moment, wenn der Verstand schweigt und das Bild selbst zu sprechen beginnt.",
   "cv_de": "**Künstlerlebenslauf**\n\n**Name:** Elena Bulatova\n\n**Ort:** München, Deutschland\n\n**Berufserfahrung**\n\n- 15 Jahre künstlerische Tätigkeit\n\n**Ausbildung**\n\n- Private Kunstwerkstätten und Meisterkurse in Russland und Europa\n- Externer Student an der AbdK München\n\n**Ausgewählte Ausstellungen**\n\n- Artlokal Viktualien Markt, München 2020, 2021\n- Kunst im Karree, München 2020, 2024\n- Jahresausstellung im AbdK\n- ArtMuc 2025\n- Kuboshow Ausstellung, Bochum 2025\n- Vernissage in Atelierhaus Berg 2026\n- \n\n",
-  "domain": "elena-bulatova.com",
   "commission_intro": "I paint to order — a portrait, a place that matters to you, a room, or a subject from your own photograph. Each work is made in oil on canvas, in the same way as the paintings shown here.",
   "commission_price_line": "Every commission is priced by the size of the canvas alone. Half when you send your request, half when the painting is in your hands.",
-  "commission_response_time": "You will receive a personal reply within two days.",
-  "commission_sizes": [
-    {
-      "width_cm": 40,
-      "height_cm": 50,
-      "price": "€1,400",
-      "deposit": "€700",
-      "stripe_link": ""
-    },
-    {
-      "width_cm": 60,
-      "height_cm": 80,
-      "price": "€2,000",
-      "deposit": "€1,000",
-      "stripe_link": ""
-    },
-    {
-      "width_cm": 80,
-      "height_cm": 100,
-      "price": "€2,800",
-      "deposit": "€1,400",
-      "stripe_link": ""
-    },
-    {
-      "width_cm": 100,
-      "height_cm": 100,
-      "price": "€3,400",
-      "deposit": "€1,700",
-      "stripe_link": ""
-    },
-    {
-      "width_cm": 120,
-      "height_cm": 90,
-      "price": "€3,900",
-      "deposit": "€1,950",
-      "stripe_link": ""
-    }
-  ],
   "commission_subjects": [
     {
-      "label": "Portrait",
-      "image": ""
+      "label": "Portrait"
     },
     {
-      "label": "Pet portrait",
-      "image": ""
+      "label": "Pet portrait"
     },
     {
-      "label": "Your own idea",
-      "image": ""
+      "label": "Your own idea"
     }
   ],
-  "commission_payment_note": "Your payment reserves the commission. If I am unable to take it on, the full amount is refunded within seven days and nothing further is owed.",
-  "commission_custom_base": 800,
-  "commission_custom_per_cm2": 0.28,
-  "commission_custom_stripe_link": "",
-  "commission_custom_note": "For a size that is not listed, the price is calculated from the area of the canvas and rounded to the nearest €50.",
   "commission_techniques": [
     {
       "label": "Oil"
@@ -82,5 +35,42 @@
     {
       "label": "Mixed technique"
     }
-  ]
+  ],
+  "commission_sizes": [
+    {
+      "width_cm": 40,
+      "height_cm": 50,
+      "price": "€1,400",
+      "deposit": "€700"
+    },
+    {
+      "width_cm": 60,
+      "height_cm": 80,
+      "price": "€2,000",
+      "deposit": "€1,000"
+    },
+    {
+      "width_cm": 80,
+      "height_cm": 100,
+      "price": "€2,800",
+      "deposit": "€1,400"
+    },
+    {
+      "width_cm": 100,
+      "height_cm": 100,
+      "price": "€3,400",
+      "deposit": "€1,700"
+    },
+    {
+      "width_cm": 120,
+      "height_cm": 90,
+      "price": "€3,900",
+      "deposit": "€1,950"
+    }
+  ],
+  "commission_custom_base": 800,
+  "commission_custom_per_cm2": 0.28,
+  "commission_custom_note": "For a size that is not listed, the price is calculated from the area of the canvas and rounded to the nearest €50.",
+  "commission_payment_note": "Your payment reserves the commission. If I am unable to take it on, the full amount is refunded within seven days and nothing further is owed.",
+  "commission_response_time": "You will receive a personal reply within two days."
 }
