@@ -26,8 +26,15 @@
 
 
 
+::selection {
+  background: #ffffe6;
+  color: #1c222a;
+}
+
 body {
   margin: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
   font-family: "Roboto Flex", sans-serif;
   font-optical-sizing: auto;
   font-weight: 400;
@@ -222,10 +229,14 @@ a.button {
   font-size: 1.1em;
   font-weight: 700;
   text-decoration: none;
-  transition: background 0.2s, color 0.2s, border 0.2s;
+  transition-property: background, color, border-color, scale;
+  transition-duration: 0.2s;
   cursor: pointer;
   margin: 0.5em 0;
 }
+
+.button:active,
+a.button:active { scale: 0.96; }
 
 .button:hover,
 a.button:hover {
@@ -410,26 +421,41 @@ a.button:hover {
   padding-inline: 20px;
   box-sizing: border-box;
 }
+/* section headings sit on the same left axis as everything else and stay quiet;
+   the hairline above each one does the separating that a bigger size would */
 .commission h2 {
   font-family: "Hina Mincho", serif;
-  font-size: 1.4em;
+  font-size: 1.25em;
   font-weight: 400;
-  margin: 3.5em 0 1em;
+  letter-spacing: 0.02em;
+  margin: 0 0 1.6em;
+  padding-top: 1.4em;
+  border-top: 1px solid rgba(255, 255, 230, 0.18);
 }
+.commission section + section,
+.commission .samples { margin-top: 5em; }
+
 .commission-title {
   font-size: clamp(2.5rem, 9vw, 5rem);
+  letter-spacing: -0.015em;
+  text-wrap: balance;
 }
 .commission-intro {
-  font-size: 1.1em;
-  line-height: 1.7;
+  font-size: 1.05em;
+  line-height: 1.75;
+  text-wrap: pretty;
+  max-width: 34em;
 }
 
 /* stated once, alone, with air around it -- not a price tag */
 .price-floor {
   font-family: "Hina Mincho", serif;
-  font-size: 1.5em;
+  font-size: 1.35em;
+  line-height: 1.55;
+  text-wrap: balance;
+  max-width: 26em;
+  margin: 4.5em auto;
   text-align: center;
-  margin: 3em 0;
 }
 
 
@@ -478,6 +504,8 @@ a.button:hover {
 }
 .sample img {
   display: block;
+  outline: 1px solid oklch(1 0 0 / 0.1);
+  outline-offset: -1px;
   height: 46vh;
   min-height: 220px;
   width: auto;
@@ -523,6 +551,8 @@ a.button:hover {
   aspect-ratio: 4 / 5;
   object-fit: cover;
   border: 1px solid rgba(255, 255, 230, 0.35);
+  outline: 1px solid oklch(1 0 0 / 0.1);
+  outline-offset: -2px;
   opacity: 0.55;
   transition: opacity 0.2s, border-color 0.2s;
 }
@@ -637,6 +667,13 @@ a.button:hover {
   margin-top: 1.2em;
   margin-bottom: 0.4em;
 }
+.order legend {
+  font-size: 0.78em;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  opacity: 0.65;
+  margin-bottom: 0.2em;
+}
 .order input,
 .order textarea {
   font-family: inherit;
@@ -744,6 +781,40 @@ a.button:hover {
   font-size: 1.5em;
 }
 #summary-split { opacity: 0.75; }
+
+.file-field {
+  display: flex;
+  align-items: center;
+  gap: 1em;
+  flex-wrap: wrap;
+}
+.file-field input[type="file"] {
+  position: absolute;
+  opacity: 0;
+  width: 1px;
+  height: 1px;
+}
+.order label.file-button {
+  margin: 0;
+  padding: 0.5em 1.2em;
+  border: 1px solid rgba(255, 255, 230, 0.4);
+  border-radius: 999px;
+  font-size: 0.9em;
+  cursor: pointer;
+  transition: border-color 0.2s, background 0.2s;
+}
+.order label.file-button:hover {
+  border-color: #ffffe6;
+  background: rgba(255, 255, 230, 0.08);
+}
+.file-field input:focus-visible + .file-button {
+  outline: 2px solid #ffffe6;
+  outline-offset: 2px;
+}
+.file-name {
+  font-size: 0.9em;
+  opacity: 0.65;
+}
 
 .custom-inputs {
   display: flex;

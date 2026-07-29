@@ -45,7 +45,7 @@ permalink: /order/
 
     {# posts to FormSubmit, which forwards the request (and any attachment) to site.email #}
     <form method="POST" enctype="multipart/form-data" action="https://formsubmit.co/{{ site.email }}">
-      <input type="hidden" name="_subject" value="New commission enquiry from the website">
+      <input type="hidden" name="_subject" value="New commission request from the website">
       <input type="hidden" name="_next" value="https://{{ site.domain }}/order-thanks/">
       <input type="hidden" name="_template" value="table">
       <input type="hidden" name="_captcha" value="false">
@@ -128,7 +128,13 @@ permalink: /order/
       <textarea id="details" name="details" rows="6" required placeholder="The subject, who it is for, where it will hang, any timing that matters."></textarea>
 
       <label for="reference">Reference photograph (optional)</label>
-      <input id="reference" name="reference" type="file" accept="image/*">
+      {# the native file control is the one piece of OS chrome on the page; the input is
+         still the real control, only visually replaced by its own label #}
+      <div class="file-field">
+        <input id="reference" name="reference" type="file" accept="image/*">
+        <label class="file-button" for="reference">Choose a photograph</label>
+        <span class="file-name" id="file-name">No file chosen</span>
+      </div>
 
       <label for="name">Your name *</label>
       <input id="name" name="name" type="text" required>
@@ -198,6 +204,12 @@ permalink: /order/
     }
     requestAnimationFrame(drift);
   }
+
+  const fileInput = document.getElementById('reference');
+  const fileName = document.getElementById('file-name');
+  fileInput.addEventListener('change', () => {
+    fileName.textContent = fileInput.files[0] ? fileInput.files[0].name : 'No file chosen';
+  });
 
   // Picking a technique repaints the subject pictures with an example in that
   // technique, falling back to the subject's own picture when she hasn't made one yet.
