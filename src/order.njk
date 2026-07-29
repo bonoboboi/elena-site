@@ -47,35 +47,30 @@ permalink: /order/
       <p hidden><label>Don't fill this in: <input name="_honey"></label></p>
 
       <fieldset class="formats">
-        <legend>Format</legend>
-        {# ratio AND width are the real canvas proportions, so a 120cm outline is visibly
-           larger than a 40cm one -- width px is roughly 0.72 x the canvas width in cm #}
-        {% for f in [
-          { value: "40 × 50 cm", ratio: "4 / 5", w: 29 },
-          { value: "60 × 80 cm", ratio: "3 / 4", w: 43 },
-          { value: "80 × 100 cm", ratio: "4 / 5", w: 58 },
-          { value: "100 × 100 cm", ratio: "1 / 1", w: 72 },
-          { value: "120 × 90 cm", ratio: "4 / 3", w: 86 }
-        ] %}
+        <legend>Size</legend>
+        {# outlines carry the real proportions AND the real relative scale, so a 120cm
+           canvas looks bigger than a 40cm one. 0.72px per cm keeps the row on one line. #}
+        {% for f in site.commission_sizes %}
         <label class="format">
-          <input type="radio" name="format" value="{{ f.value }}">
-          <span class="canvas" style="aspect-ratio: {{ f.ratio }}; width: {{ f.w }}px"></span>
-          <span class="dims">{{ f.value }}</span>
+          <input type="radio" name="format"
+                 value="{{ f.width_cm }} × {{ f.height_cm }} cm — {{ f.price }}"
+                 data-price="{{ f.price }}" data-deposit="{{ f.deposit }}"
+                 data-link="{{ f.stripe_link }}"{% if loop.first %} checked{% endif %}>
+          <span class="canvas" style="aspect-ratio: {{ f.width_cm }} / {{ f.height_cm }}; width: {{ (f.width_cm * 0.72) | round }}px"></span>
+          <span class="dims">{{ f.width_cm }} × {{ f.height_cm }} cm</span>
+          <span class="price">{{ f.price }}</span>
         </label>
         {% endfor %}
-        <label class="format">
-          <input type="radio" name="format" value="Not sure yet" checked>
-          <span class="canvas canvas-open"></span>
-          <span class="dims">Not sure yet</span>
-        </label>
       </fieldset>
 
       <fieldset class="subjects">
         <legend>Subject</legend>
-        {% for s in ["Portrait", "Landscape or a particular place", "Interior", "From my own photograph", "Something else"] %}
+        {% for s in site.commission_subjects.split("\n") %}
+        {% if s | trim %}
         <label class="subject">
-          <input type="radio" name="subject" value="{{ s }}"{% if loop.first %} checked{% endif %}> {{ s }}
+          <input type="radio" name="subject" value="{{ s | trim }}"{% if loop.first %} checked{% endif %}> {{ s | trim }}
         </label>
+        {% endif %}
         {% endfor %}
       </fieldset>
 
@@ -94,19 +89,48 @@ permalink: /order/
       <label for="phone">Telephone (optional)</label>
       <input id="phone" name="phone" type="tel">
 
-      <label class="consent"><input type="checkbox" name="privacy" required> I agree that my data will be used to answer this enquiry (<a href="/datenschutz/" class="mincho-link">Datenschutz</a>). *</label>
+      <label class="consent"><input type="checkbox" name="privacy" required> I agree that my data will be used to answer this request. <a href="/datenschutz/" class="mincho-link">Datenschutz</a> *</label>
 
-      <button type="submit" class="button">Send enquiry</button>
+      {# the withdrawal right is excluded for custom work under § 312g Abs. 2 Nr. 1 BGB,
+         but the exclusion only holds if the buyer acknowledges it before paying #}
+      <label class="consent"><input type="checkbox" name="widerruf" required> I understand that a painting made to my specification is exempt from the fourteen-day right of withdrawal. <a href="/widerruf/" class="mincho-link">Widerrufsbelehrung</a> *</label>
+
+      <p class="summary">
+        <span id="summary-total"></span>
+        <span id="summary-split"></span>
+      </p>
+
+      <button type="submit" class="button" id="submit-btn">Send request</button>
       <p class="response-time">{{ site.commission_response_time }}</p>
     </form>
 
-    {% if site.commission_deposit_link %}
-    <p class="deposit">
-      {{ site.commission_deposit_note }}
-      <a href="{{ site.commission_deposit_link }}" class="mincho-link" target="_blank" rel="noopener">Reserve a place &rarr;</a>
-    </p>
-    {% endif %}
+    <p class="payment-note">{{ site.commission_payment_note }}</p>
   </section>
 </main>
 
 <p><a href="/" class="mincho-link">&larr; Back to Portfolio</a></p>
+
+<script>
+  // Sending the form redirects to the Stripe link for the chosen size, so one button
+  // does enquiry + payment. Without JS the form still sends and lands on /order-thanks/.
+  const nextField = document.querySelector('input[name="_next"]');
+  const fallbackNext = nextField.value;
+  const total = document.getElementById('summary-total');
+  const split = document.getElementById('summary-split');
+  const btn = document.getElementById('submit-btn');
+
+  function sync() {
+    const chosen = document.querySelector('.format input:checked');
+    if (!chosen) return;
+    const link = chosen.dataset.link;
+    total.textContent = chosen.dataset.price;
+    split.textContent = link
+      ? `${chosen.dataset.deposit} payable now, the balance on delivery.`
+      : 'Payment details follow by email.';
+    btn.textContent = link ? `Send request and pay ${chosen.dataset.deposit}` : 'Send request';
+    nextField.value = link || fallbackNext;
+  }
+
+  document.querySelectorAll('.format input').forEach(r => r.addEventListener('change', sync));
+  sync();
+</script>

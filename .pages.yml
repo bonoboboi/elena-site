@@ -122,7 +122,43 @@ content:
       - name: commission_price_line
         label: "Commissions: price line"
         type: string
-        description: One quiet sentence, e.g. "Commissions begin at €1,400." Shown on its own.
+        description: One quiet sentence explaining how pricing works. Shown on its own.
+      - name: commission_subjects
+        label: "Commissions: subjects to choose from"
+        type: text
+        description: One per line, e.g. Portrait / Pet portrait / Your own idea. The price does not depend on this.
+      - name: commission_sizes
+        label: "Commissions: sizes and prices"
+        type: object
+        list: true
+        description: The canvas outlines on the page are drawn from these measurements, so keep them accurate.
+        fields:
+          - name: width_cm
+            label: Width (cm)
+            type: number
+            required: true
+          - name: height_cm
+            label: Height (cm)
+            type: number
+            required: true
+          - name: price
+            label: Full price
+            type: string
+            required: true
+            description: "e.g. €2,000"
+          - name: deposit
+            label: Amount payable now (half)
+            type: string
+            required: true
+            description: "e.g. €1,000 — must match the amount of the Stripe link below."
+          - name: stripe_link
+            label: Stripe Payment Link for that half
+            type: string
+            description: Create a Payment Link in Stripe for exactly the amount above. Leave empty and this size takes no payment — the request just arrives by email.
+      - name: commission_payment_note
+        label: "Commissions: refund promise"
+        type: text
+        description: Shown under the form. Says what happens if she cannot take the commission on.
       - name: commission_process
         label: "Commissions: how it works"
         type: rich-text
@@ -131,10 +167,3 @@ content:
         label: "Commissions: reply promise"
         type: string
         description: Shown under the Send button, e.g. "You will receive a personal reply within two days."
-      - name: commission_deposit_note
-        label: "Commissions: booking fee text"
-        type: text
-      - name: commission_deposit_link
-        label: "Commissions: booking fee Stripe link"
-        type: string
-        description: Paste a Stripe Payment Link for the booking fee. Leave empty to hide the whole booking-fee paragraph.
