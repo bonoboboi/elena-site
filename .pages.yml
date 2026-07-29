@@ -1,19 +1,19 @@
 media:
   - name: images
-    label: Photos
+    label: Фотографии
     input: src/images
     output: /images
     extensions: [jpg, jpeg, png, webp]
 
 content:
   - name: artworks
-    label: Artworks
+    label: Картины
     path: content/artworks.json
     type: file
     icon: image
     fields:
       - name: items
-        label: Paintings
+        label: Картины
         type: object
         list:
           min: 1
@@ -21,195 +21,209 @@ content:
         # without opening each one
         fields:
           - name: name
-            label: Title
+            label: Название
             type: string
             required: true
           - name: image
-            label: Photo
+            label: Фотография
             type: image
             required: true
             options:
               media: images
           - name: section
-            label: Section
+            label: Раздел
             type: select
             required: true
             default: oil
             options:
               values:
-                - { value: oil, label: Oil on Canvas }
-                - { value: graphic, label: Graphic Works }
+                - { value: oil, label: Масло на холсте }
+                - { value: graphic, label: Графика }
           - name: details
-            label: Size, medium, year
+            label: Размер, техника, год
             type: string
-            description: "e.g. 30x40cm, Oil on Canvas - Painted in 2025 on location."
+            description: "Например: 30x40 см, масло на холсте — написано в 2025 году с натуры."
           - name: series
-            label: Series heading (optional)
+            label: Заголовок серии (необязательно)
             type: string
-            description: Bold line above the long text. Leave empty for most paintings.
+            description: Жирная строка над длинным текстом. У большинства картин можно оставить пустым.
           - name: description
-            label: Longer description (optional)
+            label: Подробное описание (необязательно)
             type: rich-text
           - name: buy_link
-            label: Stripe payment link (optional)
+            label: Ссылка на оплату Stripe (необязательно)
             type: string
-            description: Paste a Stripe Payment Link to show a "Buy this painting" button. Leave empty to hide it.
+            description: Вставьте ссылку Stripe Payment Link, чтобы появилась кнопка «Купить эту картину». Оставьте пустым — кнопки не будет.
 
   - name: commissions
-    label: Commission examples
+    label: Примеры работ на заказ
     path: content/commissions.json
     type: file
     icon: brush
     fields:
       - name: items
-        label: Examples
+        label: Примеры
         type: object
         list: true
         fields:
           - name: name
-            label: Title
+            label: Название
             type: string
             required: true
           - name: image
-            label: Photo
+            label: Фотография
             type: image
             required: true
             options:
               media: images
           - name: subject
-            label: Subject
-            type: string
-            description: Must match one of the subjects under "About, CV & Contact" exactly, e.g. Portrait, Pet portrait. Leave empty to show this only in the scrolling gallery.
-          - name: technique
-            label: Technique
+            label: Сюжет
             type: select
+            required: true
+            default: gallery-only
             options:
-              values: [Oil, Oil pastel, Graphite, Ink, Mixed technique]
-            description: Picking a technique on the page swaps the subject pictures to an example tagged with it.
+              values:
+                - { value: Portrait, label: Портрет }
+                - { value: Pet portrait, label: Портрет питомца }
+                - { value: Your own idea, label: Ваша идея }
+                - { value: gallery-only, label: Только в ленте (не показывать как пример сюжета) }
+            description: На каждое сочетание «сюжет + техника» показывается только один пример — первый в списке. Если сочетание уже занято, выберите «Только в ленте».
+          - name: technique
+            label: Техника
+            type: select
+            required: true
+            options:
+              values:
+                - { value: Oil, label: Масло }
+                - { value: Oil pastel, label: Масляная пастель }
+                - { value: Graphite, label: Графит }
+                - { value: Ink, label: Тушь }
+                - { value: Mixed technique, label: Смешанная техника }
+            description: Когда посетитель выбирает технику на сайте, картинки сюжетов меняются на примеры в этой технике.
           - name: details
-            label: Size, medium, year
+            label: Размер, техника, год
             type: string
-            description: "e.g. 60x80cm, Oil on Canvas - 2025"
+            description: "Например: 60x80 см, масло на холсте — 2025"
           - name: brief
-            label: What the client asked for (optional)
+            label: Что просил заказчик (необязательно)
             type: rich-text
 
   - name: site
-    label: About, CV & Contact
+    label: О себе, резюме и контакты
     path: content/site.json
     type: file
     icon: user
     fields:
       - name: email
-        label: Contact email
+        label: Контактный e-mail
         type: string
         required: true
       - name: instagram
-        label: Instagram URL
+        label: Ссылка на Instagram
         type: string
       - name: portrait
-        label: Portrait photo
+        label: Ваша фотография
         type: image
         options:
           media: images
       - name: about_en
-        label: About text (English)
+        label: О себе (по-английски)
         type: rich-text
       - name: cv_en
-        label: CV (English)
+        label: Резюме (по-английски)
         type: rich-text
       - name: about_de
-        label: About text (Deutsch)
+        label: О себе (по-немецки)
         type: rich-text
       - name: cv_de
-        label: CV (Deutsch)
+        label: Резюме (по-немецки)
         type: rich-text
 
       # everything on the /order/ commission page, so nothing there needs a developer
       - name: commission_intro
-        label: "Commissions: intro text"
+        label: "Заказы: вступительный текст"
         type: rich-text
       - name: commission_price_line
-        label: "Commissions: price line"
+        label: "Заказы: строка о цене"
         type: string
-        description: One quiet sentence explaining how pricing works. Shown on its own.
+        description: Одно спокойное предложение о том, как считается цена. Стоит на странице отдельно.
       - name: commission_subjects
-        label: "Commissions: subjects to choose from"
+        label: "Заказы: сюжеты на выбор"
         type: object
         list: true
-        description: Each one shows as a picture the visitor clicks. The price does not depend on this.
+        description: Каждый показывается картинкой, на которую нажимает посетитель. На цену не влияет. Если переименовать сюжет, скажите разработчику — список в «Примерах работ на заказ» нужно поменять тоже.
         fields:
           - name: label
-            label: Name
+            label: Название
             type: string
             required: true
-            description: "e.g. Portrait, Pet portrait, Your own idea"
+            description: "Например: Portrait, Pet portrait, Your own idea"
           - name: image
-            label: Example picture
+            label: Картинка-пример
             type: image
             options:
               media: images
-            description: Shown as the button. Leave empty and a dashed outline appears instead.
+            description: Показывается как кнопка. Если пусто — будет пунктирная рамка.
       - name: commission_techniques
-        label: "Commissions: techniques to choose from"
+        label: "Заказы: техники на выбор"
         type: object
         list: true
-        description: "The list the visitor picks from. If you add one here, tell your developer so it can be added to the Technique dropdown on examples too."
+        description: Список, из которого выбирает посетитель. Если добавите новую технику, скажите разработчику — её нужно добавить и в выпадающий список у примеров.
         fields:
           - name: label
-            label: Name
+            label: Название
             type: string
             required: true
       - name: commission_sizes
-        label: "Commissions: sizes and prices"
+        label: "Заказы: размеры и цены"
         type: object
         list: true
-        description: The canvas outlines on the page are drawn from these measurements, so keep them accurate.
+        description: По этим размерам на странице рисуются прямоугольники холстов, поэтому указывайте их точно.
         fields:
           - name: width_cm
-            label: Width (cm)
+            label: Ширина (см)
             type: number
             required: true
           - name: height_cm
-            label: Height (cm)
+            label: Высота (см)
             type: number
             required: true
           - name: price
-            label: Full price
+            label: Полная цена
             type: string
             required: true
-            description: "e.g. €2,000"
+            description: "Например: €2,000"
           - name: deposit
-            label: Amount payable now (half)
+            label: Сумма к оплате сейчас (половина)
             type: string
             required: true
-            description: "e.g. €1,000 — must match the amount of the Stripe link below."
+            description: "Например: €1,000 — должна совпадать с суммой в ссылке Stripe ниже."
           - name: stripe_link
-            label: Stripe Payment Link for that half
+            label: Ссылка Stripe на эту половину
             type: string
-            description: Create a Payment Link in Stripe for exactly the amount above. Leave empty and this size takes no payment — the request just arrives by email.
+            description: Создайте в Stripe ссылку ровно на сумму выше. Если оставить пустым, за этот размер деньги не берутся — заявка просто придёт на почту.
       # the "Custom size" option prices itself: base + rate x area, rounded to €50
       - name: commission_custom_base
-        label: "Commissions: custom size — starting amount (€)"
+        label: "Заказы: свой размер — начальная сумма (€)"
         type: number
-        description: Added to every custom size before the area is counted. Covers materials and setup.
+        description: Прибавляется к любому своему размеру до подсчёта площади. Покрывает материалы и подготовку.
       - name: commission_custom_per_cm2
-        label: "Commissions: custom size — € per square centimetre"
+        label: "Заказы: свой размер — € за квадратный сантиметр"
         type: number
-        description: "Currently 0.28. Check it against the fixed sizes above after changing it: a 60 x 80 canvas is 4,800 cm²."
+        description: "Сейчас 0,28. После изменения сверьте с ценами выше: холст 60 x 80 — это 4 800 см²."
       - name: commission_custom_stripe_link
-        label: "Commissions: custom size — Stripe link"
+        label: "Заказы: свой размер — ссылка Stripe"
         type: string
-        description: A Stripe Payment Link where the buyer enters the amount themselves (the page tells them the figure). Leave empty and custom sizes are quoted by email instead.
+        description: Ссылка Stripe, где покупатель сам вводит сумму (страница подсказывает ему нужную цифру). Если пусто — цену на свой размер вы называете по почте.
       - name: commission_custom_note
-        label: "Commissions: custom size — note"
+        label: "Заказы: свой размер — пояснение"
         type: text
 
       - name: commission_payment_note
-        label: "Commissions: refund promise"
+        label: "Заказы: обещание о возврате"
         type: text
-        description: Shown under the form. Says what happens if she cannot take the commission on.
+        description: Показывается под формой. Говорит, что будет, если вы не сможете взять заказ.
       - name: commission_response_time
-        label: "Commissions: reply promise"
+        label: "Заказы: обещание ответить"
         type: string
-        description: Shown under the Send button, e.g. "You will receive a personal reply within two days."
+        description: "Показывается под кнопкой отправки. Например: «Вы получите личный ответ в течение двух дней»."
