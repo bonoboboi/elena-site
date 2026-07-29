@@ -395,3 +395,40 @@ a.button:hover {
   padding: 1.5em;
   margin: 1.5em 0;
 }
+
+.order form {
+  display: flex;
+  flex-direction: column;
+  max-width: 640px;
+  margin: 2em auto;
+  text-align: left;
+}
+.order label {
+  font-family: "Hina Mincho", serif;
+  margin-top: 1.2em;
+  margin-bottom: 0.4em;
+}
+.order input,
+.order textarea {
+  font-family: inherit;
+  font-size: 1em;
+  color: #ffffe6;
+  background: transparent;
+  border: 1px solid rgba(255, 255, 230, 0.4);
+  border-radius: 4px;
+  padding: 0.6em;
+}
+.order input:focus,
+.order textarea:focus {
+  outline: none;
+  border-color: #ffffe6;
+}
+.order label.consent {
+  flex-direction: row;
+  display: flex;
+  gap: 0.6em;
+  align-items: flex-start;
+  margin-top: 1.6em;
+}
+.order label.consent input { width: auto; }
+.order button { align-self: flex-start; margin-top: 1.5em; }

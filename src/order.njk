@@ -1,0 +1,45 @@
+---
+layout: base.njk
+title: Order a Painting — Elena Bulatova
+permalink: /order/
+---
+<header>
+  <h1>Order a Painting</h1>
+</header>
+
+<section class="order legal">
+  {{ site.order_intro | markdown | safe }}
+
+  {# posts to FormSubmit, which forwards the request (and any attachment) to site.email #}
+  <form method="POST" enctype="multipart/form-data" action="https://formsubmit.co/{{ site.email }}">
+    <input type="hidden" name="_subject" value="New painting order from the website">
+    <input type="hidden" name="_next" value="https://{{ site.domain }}/order-thanks/">
+    <input type="hidden" name="_template" value="table">
+    <input type="hidden" name="_captcha" value="false">
+    <p hidden><label>Don't fill this in: <input name="_honey"></label></p>
+
+    <label for="name">Your name *</label>
+    <input id="name" name="name" type="text" required>
+
+    <label for="email">Email *</label>
+    <input id="email" name="email" type="email" required>
+
+    <label for="phone">Phone (optional)</label>
+    <input id="phone" name="phone" type="tel">
+
+    <label for="size">Size / format (optional)</label>
+    <input id="size" name="size" type="text" placeholder="e.g. 60 × 80 cm, oil on canvas">
+
+    <label for="details">What would you like? *</label>
+    <textarea id="details" name="details" rows="6" required placeholder="Subject, colours, mood, deadline, where it will hang…"></textarea>
+
+    <label for="reference">Reference image (optional, max 8 MB)</label>
+    <input id="reference" name="reference" type="file" accept="image/*">
+
+    <label class="consent"><input type="checkbox" name="privacy" required> I agree that my data will be used to answer this request (<a href="/datenschutz/" class="mincho-link">Datenschutz</a>). *</label>
+
+    <button type="submit" class="button">Send request</button>
+  </form>
+</section>
+
+<p><a href="/" class="mincho-link">&larr; Back to Portfolio</a></p>

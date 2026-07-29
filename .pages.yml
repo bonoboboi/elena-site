@@ -73,6 +73,9 @@ content:
         type: image
         options:
           media: images
+      - name: order_intro
+        label: Order page intro text
+        type: rich-text
       - name: about_en
         label: About text (English)
         type: rich-text
