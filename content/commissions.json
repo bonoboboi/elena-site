@@ -2,15 +2,21 @@
   "items": [
     {
       "name": "portrait, oil on canvas",
-      "image": "/images/IMG_9381.jpg"
+      "image": "/images/IMG_9381.jpg",
+      "subject": "gallery-only",
+      "technique": "Graphite"
     },
     {
       "name": "portrait, oil on canvas",
-      "image": "/images/IMG_9380.jpg"
+      "image": "/images/IMG_9380.jpg",
+      "subject": "gallery-only",
+      "technique": "Mixed technique"
     },
     {
       "name": "portrait, oil on canvas",
-      "image": "/images/IMG_9379.jpg"
+      "image": "/images/IMG_9379.jpg",
+      "subject": "Your own idea",
+      "technique": "Oil"
     }
   ]
 }
