@@ -1,3 +1,16 @@
 {
-  "items": []
+  "items": [
+    {
+      "name": "portrait, oil on canvas",
+      "image": "/images/IMG_9381.jpg"
+    },
+    {
+      "name": "portrait, oil on canvas",
+      "image": "/images/IMG_9380.jpg"
+    },
+    {
+      "name": "portrait, oil on canvas",
+      "image": "/images/IMG_9379.jpg"
+    }
+  ]
 }
