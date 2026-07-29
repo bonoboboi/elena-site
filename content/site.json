@@ -49,5 +49,9 @@
     }
   ],
   "commission_subjects": "Portrait\nPet portrait\nYour own idea",
-  "commission_payment_note": "Your payment reserves the commission. If I am unable to take it on, the full amount is refunded within seven days and nothing further is owed."
+  "commission_payment_note": "Your payment reserves the commission. If I am unable to take it on, the full amount is refunded within seven days and nothing further is owed.",
+  "commission_custom_base": 800,
+  "commission_custom_per_cm2": 0.28,
+  "commission_custom_stripe_link": "",
+  "commission_custom_note": "For a size that is not listed, the price is calculated from the area of the canvas and rounded to the nearest €50."
 }

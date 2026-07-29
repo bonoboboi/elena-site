@@ -155,6 +155,23 @@ content:
             label: Stripe Payment Link for that half
             type: string
             description: Create a Payment Link in Stripe for exactly the amount above. Leave empty and this size takes no payment — the request just arrives by email.
+      # the "Custom size" option prices itself: base + rate x area, rounded to €50
+      - name: commission_custom_base
+        label: "Commissions: custom size — starting amount (€)"
+        type: number
+        description: Added to every custom size before the area is counted. Covers materials and setup.
+      - name: commission_custom_per_cm2
+        label: "Commissions: custom size — € per square centimetre"
+        type: number
+        description: "Currently 0.28. Check it against the fixed sizes above after changing it: a 60 x 80 canvas is 4,800 cm²."
+      - name: commission_custom_stripe_link
+        label: "Commissions: custom size — Stripe link"
+        type: string
+        description: A Stripe Payment Link where the buyer enters the amount themselves (the page tells them the figure). Leave empty and custom sizes are quoted by email instead.
+      - name: commission_custom_note
+        label: "Commissions: custom size — note"
+        type: text
+
       - name: commission_payment_note
         label: "Commissions: refund promise"
         type: text

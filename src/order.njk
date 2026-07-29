@@ -61,7 +61,32 @@ permalink: /order/
           <span class="price">{{ f.price }}</span>
         </label>
         {% endfor %}
+
+        <label class="format" id="custom-format">
+          <input type="radio" name="format" value="Custom size" data-custom="1"
+                 data-base="{{ site.commission_custom_base }}"
+                 data-rate="{{ site.commission_custom_per_cm2 }}"
+                 data-link="{{ site.commission_custom_stripe_link }}">
+          {# this outline redraws itself to whatever measurements are typed below #}
+          <span class="canvas canvas-open" id="custom-canvas"></span>
+          <span class="dims">Custom size</span>
+          <span class="price" id="custom-price">&mdash;</span>
+        </label>
       </fieldset>
+
+      <div id="custom-fields" hidden>
+        <div class="custom-inputs">
+          <span>
+            <label for="custom-w">Width (cm)</label>
+            <input id="custom-w" name="custom_width" type="number" min="20" max="200" step="1" value="70">
+          </span>
+          <span>
+            <label for="custom-h">Height (cm)</label>
+            <input id="custom-h" name="custom_height" type="number" min="20" max="200" step="1" value="90">
+          </span>
+        </div>
+        <p class="custom-note">{{ site.commission_custom_note }}</p>
+      </div>
 
       <fieldset class="subjects">
         <legend>Subject</legend>
@@ -119,18 +144,72 @@ permalink: /order/
   const split = document.getElementById('summary-split');
   const btn = document.getElementById('submit-btn');
 
+  const customRadio = document.querySelector('.format input[data-custom]');
+  const customFields = document.getElementById('custom-fields');
+  const customCanvas = document.getElementById('custom-canvas');
+  const customPrice = document.getElementById('custom-price');
+  const wIn = document.getElementById('custom-w');
+  const hIn = document.getElementById('custom-h');
+
+  const euro = (n) => '€' + Math.round(n).toLocaleString('en-US');
+
+  // clamped to the input's own min/max so a typo can't produce a €40,000 canvas
+  function cm(input) {
+    const v = Number(input.value);
+    if (!Number.isFinite(v) || v <= 0) return null;
+    return Math.min(Math.max(v, Number(input.min)), Number(input.max));
+  }
+
+  // price = base + rate per cm², rounded to the nearest €50 so it never looks computed
+  function customQuote() {
+    const w = cm(wIn), h = cm(hIn);
+    if (!w || !h) return null;
+    const raw = Number(customRadio.dataset.base) + w * h * Number(customRadio.dataset.rate);
+    const price = Math.round(raw / 50) * 50;
+    return { w, h, price, deposit: Math.round(price / 2 / 5) * 5 };
+  }
+
+  function syncCustom() {
+    const q = customQuote();
+    customCanvas.style.aspectRatio = q ? `${q.w} / ${q.h}` : '1 / 1';
+    customCanvas.style.width = q ? `${Math.round(Math.min(q.w, 120) * 0.72)}px` : '58px';
+    customPrice.textContent = q ? euro(q.price) : '—';
+    // never leave a stale size on the radio -- that value is what lands in her inbox
+    customRadio.value = q
+      ? `Custom ${q.w} × ${q.h} cm — ${euro(q.price)}`
+      : 'Custom size — measurements not given';
+    customRadio.dataset.price = q ? euro(q.price) : '';
+    customRadio.dataset.deposit = q ? euro(q.deposit) : '';
+  }
+
   function sync() {
     const chosen = document.querySelector('.format input:checked');
     if (!chosen) return;
+    const isCustom = !!chosen.dataset.custom;
+    customFields.hidden = !isCustom;
+    wIn.required = hIn.required = isCustom;
+    if (isCustom) syncCustom();
+
     const link = chosen.dataset.link;
-    total.textContent = chosen.dataset.price;
-    split.textContent = link
+    const priced = !isCustom || customQuote();
+    total.textContent = priced ? chosen.dataset.price : 'Enter both measurements';
+    split.textContent = link && priced
       ? `${chosen.dataset.deposit} payable now, the balance on delivery.`
       : 'Payment details follow by email.';
-    btn.textContent = link ? `Send request and pay ${chosen.dataset.deposit}` : 'Send request';
-    nextField.value = link || fallbackNext;
+    btn.textContent = link && priced ? `Send request and pay ${chosen.dataset.deposit}` : 'Send request';
+    nextField.value = (link && priced) ? link : fallbackNext;
   }
 
   document.querySelectorAll('.format input').forEach(r => r.addEventListener('change', sync));
+  [wIn, hIn].forEach(i => {
+    i.addEventListener('input', sync);
+    // on blur, show the number actually being quoted rather than what was typed
+    i.addEventListener('change', () => {
+      const v = cm(i);
+      if (v) i.value = v;
+      sync();
+    });
+  });
+  syncCustom();
   sync();
 </script>
