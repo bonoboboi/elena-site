@@ -578,7 +578,6 @@ a.button:hover {
 .order label.technique {
   margin: 0;
   cursor: pointer;
-  font-family: inherit;
 }
 .technique input {
   position: absolute;
@@ -624,7 +623,6 @@ a.button:hover {
 .order label.technique {
   margin: 0;
   cursor: pointer;
-  font-family: inherit;
 }
 .technique input {
   position: absolute;
@@ -812,6 +810,7 @@ a.button:hover {
   outline-offset: 2px;
 }
 .file-name {
+  font-family: "Hina Mincho", serif;
   font-size: 0.9em;
   opacity: 0.65;
 }
