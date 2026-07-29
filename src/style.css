@@ -398,10 +398,17 @@ a.button:hover {
 
 /* --- Commission page --- */
 
+/* the strip below is wider than the viewport by design; without this the flex item
+   refuses to shrink and drags the whole page into horizontal overflow on phones */
+.main-content { width: 100%; }
+
 .commission {
   max-width: 640px;
   margin: 0 auto;
   text-align: left;
+  /* a gutter on phones, where the body padding drops to zero */
+  padding-inline: 20px;
+  box-sizing: border-box;
 }
 .commission h2 {
   font-family: "Hina Mincho", serif;
@@ -427,6 +434,26 @@ a.button:hover {
 
 
 /* horizontal strip, snapped, scrollbar hidden -- the images do the inviting */
+.samples-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1em;
+}
+.strip-pause {
+  background: none;
+  border: 0;
+  border-bottom: 1px solid rgba(255, 255, 230, 0.4);
+  color: inherit;
+  font-family: "Hina Mincho", serif;
+  font-size: 0.9em;
+  padding: 0.4em 0.2em;
+  cursor: pointer;
+  opacity: 0.75;
+}
+.strip-pause:hover { opacity: 1; border-bottom-color: #ffffe6; }
+.strip-pause:focus-visible { outline: 2px solid #ffffe6; outline-offset: 2px; }
+
 .sample-strip {
   display: flex;
   gap: 1.2em;
@@ -434,6 +461,7 @@ a.button:hover {
   /* without this the strip is also a vertical scroll container and swallows the
      page scroll whenever the pointer is over it */
   overflow-y: hidden;
+  min-width: 0;
   scrollbar-width: none;
   padding-bottom: 0.5em;
   /* break out of the 640px measure so the strip runs to the edges */

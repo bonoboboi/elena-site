@@ -18,7 +18,12 @@ permalink: /order/
   {# drifts on its own, still draggable. The list is rendered twice so the wrap at the
      halfway point is invisible; the second copy is hidden from screen readers. #}
   <section class="samples">
-    <h2>Painted to order</h2>
+    <div class="samples-head">
+      <h2>Painted to order</h2>
+      {# WCAG 2.2.2: moving content that starts on its own needs a mechanism to stop it
+         that does not depend on hovering #}
+      <button type="button" class="strip-pause" id="strip-pause" hidden aria-pressed="false">Pause</button>
+    </div>
     <div class="sample-strip" id="sample-strip">
       {% for pass in [1, 2] %}
       {% for c in commissions.items %}
@@ -159,17 +164,28 @@ permalink: /order/
   // The strip drifts by itself. Halting on hover, touch or a held pointer means it
   // never fights someone reading or dragging it.
   const strip = document.getElementById('sample-strip');
+  const pauseBtn = document.getElementById('strip-pause');
   if (strip && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    let paused = false;
+    let hovered = false;
+    let stopped = false;
+    const paused = () => hovered || stopped;
     let last = null;
 
     ['pointerenter', 'pointerdown', 'touchstart', 'focusin'].forEach(e =>
-      strip.addEventListener(e, () => { paused = true; }, { passive: true }));
+      strip.addEventListener(e, () => { hovered = true; }, { passive: true }));
     ['pointerleave', 'pointerup', 'touchend'].forEach(e =>
-      strip.addEventListener(e, () => { paused = false; }, { passive: true }));
+      strip.addEventListener(e, () => { hovered = false; }, { passive: true }));
+
+    // only offered when the strip actually moves, so it never appears as dead chrome
+    pauseBtn.hidden = false;
+    pauseBtn.addEventListener('click', () => {
+      stopped = !stopped;
+      pauseBtn.textContent = stopped ? 'Play' : 'Pause';
+      pauseBtn.setAttribute('aria-pressed', String(stopped));
+    });
 
     function drift(now) {
-      if (last !== null && !paused && document.visibilityState === 'visible') {
+      if (last !== null && !paused() && document.visibilityState === 'visible') {
         // 14px per second, slow enough to read past. The delta is capped because a
         // throttled tab hands back one huge frame and the strip would lurch.
         strip.scrollLeft += Math.min(now - last, 50) * 0.014;
