@@ -125,8 +125,21 @@ content:
         description: One quiet sentence explaining how pricing works. Shown on its own.
       - name: commission_subjects
         label: "Commissions: subjects to choose from"
-        type: text
-        description: One per line, e.g. Portrait / Pet portrait / Your own idea. The price does not depend on this.
+        type: object
+        list: true
+        description: Each one shows as a picture the visitor clicks. The price does not depend on this.
+        fields:
+          - name: label
+            label: Name
+            type: string
+            required: true
+            description: "e.g. Portrait, Pet portrait, Your own idea"
+          - name: image
+            label: Example picture
+            type: image
+            options:
+              media: images
+            description: Shown as the button. Leave empty and a dashed outline appears instead.
       - name: commission_sizes
         label: "Commissions: sizes and prices"
         type: object
@@ -176,10 +189,6 @@ content:
         label: "Commissions: refund promise"
         type: text
         description: Shown under the form. Says what happens if she cannot take the commission on.
-      - name: commission_process
-        label: "Commissions: how it works"
-        type: rich-text
-        description: One bold line per step (that becomes the step heading), then the explanation below it.
       - name: commission_response_time
         label: "Commissions: reply promise"
         type: string

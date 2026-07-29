@@ -425,18 +425,102 @@ a.button:hover {
   margin: 3em 0;
 }
 
-.process p { margin: 0 0 1.6em; line-height: 1.7; }
-.process strong {
+
+/* horizontal strip, snapped, scrollbar hidden -- the images do the inviting */
+.sample-strip {
+  display: flex;
+  gap: 1.2em;
+  overflow-x: auto;
+  /* without this the strip is also a vertical scroll container and swallows the
+     page scroll whenever the pointer is over it */
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  padding-bottom: 0.5em;
+  /* break out of the 640px measure so the strip runs to the edges */
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+  padding-left: calc(50vw - 50%);
+  padding-right: calc(50vw - 50%);
+}
+.sample-strip::-webkit-scrollbar { display: none; }
+.sample {
+  flex: 0 0 auto;
+  margin: 0;
+  scroll-snap-align: center;
+  max-width: 80vw;
+}
+.sample img {
   display: block;
+  height: 46vh;
+  min-height: 220px;
+  width: auto;
+  max-width: 80vw;
+  object-fit: contain;
+}
+.sample figcaption {
+  margin-top: 0.7em;
+  font-size: 0.9em;
+  line-height: 1.5;
+}
+.sample figcaption strong {
   font-family: "Hina Mincho", serif;
   font-weight: 400;
-  font-size: 1.15em;
-  border-top: 1px solid rgba(255, 255, 230, 0.25);
-  padding-top: 0.8em;
-  margin-bottom: 0.3em;
+  display: block;
 }
+.sample figcaption span { opacity: 0.7; }
 
-.samples .artwork-group { margin-top: 1em; }
+/* subject chosen by looking at a painting, not by reading a label */
+.subject-cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.2em;
+  margin-top: 0.8em;
+}
+.order label.subject {
+  display: block;
+  margin: 0;
+  cursor: pointer;
+  width: 150px;
+  max-width: 40vw;
+}
+.order label.subject input {
+  position: absolute;
+  opacity: 0;
+  width: 1px;
+  height: 1px;
+}
+.subject img,
+.subject-placeholder {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  border: 1px solid rgba(255, 255, 230, 0.35);
+  opacity: 0.55;
+  transition: opacity 0.2s, border-color 0.2s;
+}
+.subject-placeholder { border-style: dashed; }
+.subject:hover img,
+.subject:hover .subject-placeholder { opacity: 0.8; }
+.subject input:checked ~ img,
+.subject input:checked ~ .subject-placeholder {
+  opacity: 1;
+  border-color: #ffffe6;
+}
+.subject input:focus-visible ~ img,
+.subject input:focus-visible ~ .subject-placeholder {
+  outline: 2px solid #ffffe6;
+  outline-offset: 2px;
+}
+.subject-label {
+  display: block;
+  margin-top: 0.5em;
+  font-family: "Hina Mincho", serif;
+  font-size: 0.95em;
+  opacity: 0.75;
+}
+.subject input:checked ~ .subject-label { opacity: 1; }
 
 .order form {
   display: flex;
@@ -526,8 +610,6 @@ a.button:hover {
 .format input:checked ~ .dims,
 .format input:checked ~ .price { opacity: 1; }
 
-.subjects { display: flex; flex-direction: column; }
-.order label.subject,
 .order label.consent {
   display: flex;
   flex-direction: row;
@@ -538,7 +620,6 @@ a.button:hover {
 }
 .order label.consent { margin-top: 1.6em; line-height: 1.6; }
 .order label.consent .mincho-link { white-space: nowrap; }
-.order label.subject input,
 .order label.consent input { width: auto; }
 
 .order button { align-self: flex-start; margin-top: 1.8em; }

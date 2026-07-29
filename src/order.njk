@@ -14,22 +14,19 @@ permalink: /order/
 
   <p class="price-floor">{{ site.commission_price_line }}</p>
 
-  <section class="process">
-    {{ site.commission_process | markdown | safe }}
-  </section>
-
   {% if commissions.items.length %}
+  {# scroll-snap strip: no carousel library, and it stays swipeable on a phone #}
   <section class="samples">
-    <h2>Previous commissions</h2>
-    <img src="/images/temp_separator.jpg" alt="" class="separator">
-    <div class="artwork-group">
+    <h2>Painted to order</h2>
+    <div class="sample-strip">
       {% for c in commissions.items %}
-      <section class="artwork">
+      <figure class="sample">
         <img src="{{ c.image }}" alt="{{ c.name }}" loading="lazy">
-        <h3>{{ c.name }}</h3>
-        {% if c.details %}<p>{{ c.details }}</p>{% endif %}
-        {% if c.brief %}{{ c.brief | markdown | safe }}{% endif %}
-      </section>
+        <figcaption>
+          <strong>{{ c.name }}</strong>
+          {% if c.details %}<span>{{ c.details }}</span>{% endif %}
+        </figcaption>
+      </figure>
       {% endfor %}
     </div>
   </section>
@@ -90,13 +87,19 @@ permalink: /order/
 
       <fieldset class="subjects">
         <legend>Subject</legend>
-        {% for s in site.commission_subjects.split("\n") %}
-        {% if s | trim %}
-        <label class="subject">
-          <input type="radio" name="subject" value="{{ s | trim }}"{% if loop.first %} checked{% endif %}> {{ s | trim }}
-        </label>
-        {% endif %}
-        {% endfor %}
+        <div class="subject-cards">
+          {% for s in site.commission_subjects %}
+          <label class="subject">
+            <input type="radio" name="subject" value="{{ s.label }}"{% if loop.first %} checked{% endif %}>
+            {% if s.image %}
+            <img src="{{ s.image }}" alt="" loading="lazy">
+            {% else %}
+            <span class="subject-placeholder"></span>
+            {% endif %}
+            <span class="subject-label">{{ s.label }}</span>
+          </label>
+          {% endfor %}
+        </div>
       </fieldset>
 
       <label for="details">What do you have in mind? *</label>
