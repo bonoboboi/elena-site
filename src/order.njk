@@ -15,18 +15,21 @@ permalink: /order/
   <p class="price-floor">{{ site.commission_price_line }}</p>
 
   {% if commissions.items.length %}
-  {# scroll-snap strip: no carousel library, and it stays swipeable on a phone #}
+  {# drifts on its own, still draggable. The list is rendered twice so the wrap at the
+     halfway point is invisible; the second copy is hidden from screen readers. #}
   <section class="samples">
     <h2>Painted to order</h2>
-    <div class="sample-strip">
+    <div class="sample-strip" id="sample-strip">
+      {% for pass in [1, 2] %}
       {% for c in commissions.items %}
-      <figure class="sample">
+      <figure class="sample"{% if pass == 2 %} aria-hidden="true"{% endif %}>
         <img src="{{ c.image }}" alt="{{ c.name }}" loading="lazy">
         <figcaption>
           <strong>{{ c.name }}</strong>
           {% if c.details %}<span>{{ c.details }}</span>{% endif %}
         </figcaption>
       </figure>
+      {% endfor %}
       {% endfor %}
     </div>
   </section>
@@ -139,6 +142,33 @@ permalink: /order/
 <p><a href="/" class="mincho-link">&larr; Back to Portfolio</a></p>
 
 <script>
+  // The strip drifts by itself. Halting on hover, touch or a held pointer means it
+  // never fights someone reading or dragging it.
+  const strip = document.getElementById('sample-strip');
+  if (strip && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    let paused = false;
+    let last = null;
+
+    ['pointerenter', 'pointerdown', 'touchstart', 'focusin'].forEach(e =>
+      strip.addEventListener(e, () => { paused = true; }, { passive: true }));
+    ['pointerleave', 'pointerup', 'touchend'].forEach(e =>
+      strip.addEventListener(e, () => { paused = false; }, { passive: true }));
+
+    function drift(now) {
+      if (last !== null && !paused && document.visibilityState === 'visible') {
+        // 14px per second, slow enough to read past. The delta is capped because a
+        // throttled tab hands back one huge frame and the strip would lurch.
+        strip.scrollLeft += Math.min(now - last, 50) * 0.014;
+        // the two rendered copies are identical, so this wrap is invisible
+        const half = strip.scrollWidth / 2;
+        if (strip.scrollLeft >= half) strip.scrollLeft -= half;
+      }
+      last = now;
+      requestAnimationFrame(drift);
+    }
+    requestAnimationFrame(drift);
+  }
+
   // Sending the form redirects to the Stripe link for the chosen size, so one button
   // does enquiry + payment. Without JS the form still sends and lands on /order-thanks/.
   const nextField = document.querySelector('input[name="_next"]');
