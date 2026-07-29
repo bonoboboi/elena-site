@@ -55,6 +55,35 @@ content:
             type: string
             description: Paste a Stripe Payment Link to show a "Buy this painting" button. Leave empty to hide it.
 
+  - name: commissions
+    label: Commission examples
+    path: content/commissions.json
+    type: file
+    icon: brush
+    fields:
+      - name: items
+        label: Examples
+        type: object
+        list: true
+        fields:
+          - name: name
+            label: Title
+            type: string
+            required: true
+          - name: image
+            label: Photo
+            type: image
+            required: true
+            options:
+              media: images
+          - name: details
+            label: Size, medium, year
+            type: string
+            description: "e.g. 60x80cm, Oil on Canvas - 2025"
+          - name: brief
+            label: What the client asked for (optional)
+            type: rich-text
+
   - name: site
     label: About, CV & Contact
     path: content/site.json
@@ -73,9 +102,6 @@ content:
         type: image
         options:
           media: images
-      - name: order_intro
-        label: Order page intro text
-        type: rich-text
       - name: about_en
         label: About text (English)
         type: rich-text
@@ -88,3 +114,27 @@ content:
       - name: cv_de
         label: CV (Deutsch)
         type: rich-text
+
+      # everything on the /order/ commission page, so nothing there needs a developer
+      - name: commission_intro
+        label: "Commissions: intro text"
+        type: rich-text
+      - name: commission_price_line
+        label: "Commissions: price line"
+        type: string
+        description: One quiet sentence, e.g. "Commissions begin at €1,400." Shown on its own.
+      - name: commission_process
+        label: "Commissions: how it works"
+        type: rich-text
+        description: One bold line per step (that becomes the step heading), then the explanation below it.
+      - name: commission_response_time
+        label: "Commissions: reply promise"
+        type: string
+        description: Shown under the Send button, e.g. "You will receive a personal reply within two days."
+      - name: commission_deposit_note
+        label: "Commissions: booking fee text"
+        type: text
+      - name: commission_deposit_link
+        label: "Commissions: booking fee Stripe link"
+        type: string
+        description: Paste a Stripe Payment Link for the booking fee. Leave empty to hide the whole booking-fee paragraph.

@@ -1,45 +1,112 @@
 ---
 layout: base.njk
-title: Order a Painting — Elena Bulatova
+title: Commissions — Elena Bulatova
 permalink: /order/
 ---
 <header>
-  <h1>Order a Painting</h1>
+  <h1 class="commission-title">Commissions</h1>
 </header>
 
-<section class="order legal">
-  {{ site.order_intro | markdown | safe }}
+<main class="commission">
+  <section class="commission-intro">
+    {{ site.commission_intro | markdown | safe }}
+  </section>
 
-  {# posts to FormSubmit, which forwards the request (and any attachment) to site.email #}
-  <form method="POST" enctype="multipart/form-data" action="https://formsubmit.co/{{ site.email }}">
-    <input type="hidden" name="_subject" value="New painting order from the website">
-    <input type="hidden" name="_next" value="https://{{ site.domain }}/order-thanks/">
-    <input type="hidden" name="_template" value="table">
-    <input type="hidden" name="_captcha" value="false">
-    <p hidden><label>Don't fill this in: <input name="_honey"></label></p>
+  <p class="price-floor">{{ site.commission_price_line }}</p>
 
-    <label for="name">Your name *</label>
-    <input id="name" name="name" type="text" required>
+  <section class="process">
+    {{ site.commission_process | markdown | safe }}
+  </section>
 
-    <label for="email">Email *</label>
-    <input id="email" name="email" type="email" required>
+  {% if commissions.items.length %}
+  <section class="samples">
+    <h2>Previous commissions</h2>
+    <img src="/images/temp_separator.jpg" alt="" class="separator">
+    <div class="artwork-group">
+      {% for c in commissions.items %}
+      <section class="artwork">
+        <img src="{{ c.image }}" alt="{{ c.name }}" loading="lazy">
+        <h3>{{ c.name }}</h3>
+        {% if c.details %}<p>{{ c.details }}</p>{% endif %}
+        {% if c.brief %}{{ c.brief | markdown | safe }}{% endif %}
+      </section>
+      {% endfor %}
+    </div>
+  </section>
+  {% endif %}
 
-    <label for="phone">Phone (optional)</label>
-    <input id="phone" name="phone" type="tel">
+  <section class="order">
+    <h2>Begin a commission</h2>
 
-    <label for="size">Size / format (optional)</label>
-    <input id="size" name="size" type="text" placeholder="e.g. 60 × 80 cm, oil on canvas">
+    {# posts to FormSubmit, which forwards the request (and any attachment) to site.email #}
+    <form method="POST" enctype="multipart/form-data" action="https://formsubmit.co/{{ site.email }}">
+      <input type="hidden" name="_subject" value="New commission enquiry from the website">
+      <input type="hidden" name="_next" value="https://{{ site.domain }}/order-thanks/">
+      <input type="hidden" name="_template" value="table">
+      <input type="hidden" name="_captcha" value="false">
+      <p hidden><label>Don't fill this in: <input name="_honey"></label></p>
 
-    <label for="details">What would you like? *</label>
-    <textarea id="details" name="details" rows="6" required placeholder="Subject, colours, mood, deadline, where it will hang…"></textarea>
+      <fieldset class="formats">
+        <legend>Format</legend>
+        {# ratio AND width are the real canvas proportions, so a 120cm outline is visibly
+           larger than a 40cm one -- width px is roughly 0.72 x the canvas width in cm #}
+        {% for f in [
+          { value: "40 × 50 cm", ratio: "4 / 5", w: 29 },
+          { value: "60 × 80 cm", ratio: "3 / 4", w: 43 },
+          { value: "80 × 100 cm", ratio: "4 / 5", w: 58 },
+          { value: "100 × 100 cm", ratio: "1 / 1", w: 72 },
+          { value: "120 × 90 cm", ratio: "4 / 3", w: 86 }
+        ] %}
+        <label class="format">
+          <input type="radio" name="format" value="{{ f.value }}">
+          <span class="canvas" style="aspect-ratio: {{ f.ratio }}; width: {{ f.w }}px"></span>
+          <span class="dims">{{ f.value }}</span>
+        </label>
+        {% endfor %}
+        <label class="format">
+          <input type="radio" name="format" value="Not sure yet" checked>
+          <span class="canvas canvas-open"></span>
+          <span class="dims">Not sure yet</span>
+        </label>
+      </fieldset>
 
-    <label for="reference">Reference image (optional, max 8 MB)</label>
-    <input id="reference" name="reference" type="file" accept="image/*">
+      <fieldset class="subjects">
+        <legend>Subject</legend>
+        {% for s in ["Portrait", "Landscape or a particular place", "Interior", "From my own photograph", "Something else"] %}
+        <label class="subject">
+          <input type="radio" name="subject" value="{{ s }}"{% if loop.first %} checked{% endif %}> {{ s }}
+        </label>
+        {% endfor %}
+      </fieldset>
 
-    <label class="consent"><input type="checkbox" name="privacy" required> I agree that my data will be used to answer this request (<a href="/datenschutz/" class="mincho-link">Datenschutz</a>). *</label>
+      <label for="details">What do you have in mind? *</label>
+      <textarea id="details" name="details" rows="6" required placeholder="The subject, who it is for, where it will hang, any timing that matters."></textarea>
 
-    <button type="submit" class="button">Send request</button>
-  </form>
-</section>
+      <label for="reference">Reference photograph (optional)</label>
+      <input id="reference" name="reference" type="file" accept="image/*">
+
+      <label for="name">Your name *</label>
+      <input id="name" name="name" type="text" required>
+
+      <label for="email">Email *</label>
+      <input id="email" name="email" type="email" required>
+
+      <label for="phone">Telephone (optional)</label>
+      <input id="phone" name="phone" type="tel">
+
+      <label class="consent"><input type="checkbox" name="privacy" required> I agree that my data will be used to answer this enquiry (<a href="/datenschutz/" class="mincho-link">Datenschutz</a>). *</label>
+
+      <button type="submit" class="button">Send enquiry</button>
+      <p class="response-time">{{ site.commission_response_time }}</p>
+    </form>
+
+    {% if site.commission_deposit_link %}
+    <p class="deposit">
+      {{ site.commission_deposit_note }}
+      <a href="{{ site.commission_deposit_link }}" class="mincho-link" target="_blank" rel="noopener">Reserve a place &rarr;</a>
+    </p>
+    {% endif %}
+  </section>
+</main>
 
 <p><a href="/" class="mincho-link">&larr; Back to Portfolio</a></p>

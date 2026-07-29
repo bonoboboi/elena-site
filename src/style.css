@@ -396,14 +396,55 @@ a.button:hover {
   margin: 1.5em 0;
 }
 
+/* --- Commission page --- */
+
+.commission {
+  max-width: 640px;
+  margin: 0 auto;
+  text-align: left;
+}
+.commission h2 {
+  font-family: "Hina Mincho", serif;
+  font-size: 1.4em;
+  font-weight: 400;
+  margin: 3.5em 0 1em;
+}
+.commission-title {
+  font-size: clamp(2.5rem, 9vw, 5rem);
+}
+.commission-intro {
+  font-size: 1.1em;
+  line-height: 1.7;
+}
+
+/* stated once, alone, with air around it -- not a price tag */
+.price-floor {
+  font-family: "Hina Mincho", serif;
+  font-size: 1.5em;
+  text-align: center;
+  margin: 3em 0;
+}
+
+.process p { margin: 0 0 1.6em; line-height: 1.7; }
+.process strong {
+  display: block;
+  font-family: "Hina Mincho", serif;
+  font-weight: 400;
+  font-size: 1.15em;
+  border-top: 1px solid rgba(255, 255, 230, 0.25);
+  padding-top: 0.8em;
+  margin-bottom: 0.3em;
+}
+
+.samples .artwork-group { margin-top: 1em; }
+
 .order form {
   display: flex;
   flex-direction: column;
-  max-width: 640px;
-  margin: 2em auto;
   text-align: left;
 }
-.order label {
+.order label,
+.order legend {
   font-family: "Hina Mincho", serif;
   margin-top: 1.2em;
   margin-bottom: 0.4em;
@@ -418,17 +459,93 @@ a.button:hover {
   border-radius: 4px;
   padding: 0.6em;
 }
-.order input:focus,
-.order textarea:focus {
-  outline: none;
-  border-color: #ffffe6;
+.order input:focus-visible,
+.order textarea:focus-visible,
+.order .format input:focus-visible + .canvas {
+  outline: 2px solid #ffffe6;
+  outline-offset: 2px;
 }
-.order label.consent {
-  flex-direction: row;
+.order input:focus,
+.order textarea:focus { border-color: #ffffe6; }
+
+.order input[type="radio"],
+.order input[type="checkbox"] { accent-color: #ffffe6; }
+
+.order fieldset {
+  border: 0;
+  padding: 0;
+  margin: 1.8em 0 0;
+}
+.order legend { padding: 0; }
+
+/* canvas outlines at true proportion, so choosing a size is a visual decision */
+.formats {
   display: flex;
+  flex-wrap: wrap;
+  gap: 1.4em;
+  align-items: flex-end;
+}
+.format {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5em;
+  margin: 0;
+  cursor: pointer;
+}
+.format input {
+  position: absolute;
+  opacity: 0;
+  width: 1px;
+  height: 1px;
+}
+.format .canvas {
+  display: block;
+  width: 62px;
+  flex-shrink: 0;
+  border: 1px solid rgba(255, 255, 230, 0.45);
+  transition: border-color 0.2s, background 0.2s;
+}
+.format .canvas-open {
+  aspect-ratio: 1 / 1;
+  width: 58px;
+  border-style: dashed;
+}
+.format:hover .canvas { border-color: #ffffe6; }
+.format input:checked + .canvas {
+  border-color: #ffffe6;
+  background: rgba(255, 255, 230, 0.12);
+}
+.format .dims {
+  font-size: 0.85em;
+  opacity: 0.75;
+}
+.format input:checked ~ .dims { opacity: 1; }
+
+.subjects { display: flex; flex-direction: column; }
+.order label.subject,
+.order label.consent {
+  display: flex;
+  flex-direction: row;
   gap: 0.6em;
   align-items: flex-start;
-  margin-top: 1.6em;
+  margin-top: 0.6em;
+  font-family: inherit;
 }
+.order label.consent { margin-top: 2em; }
+.order label.subject input,
 .order label.consent input { width: auto; }
-.order button { align-self: flex-start; margin-top: 1.5em; }
+
+.order button { align-self: flex-start; margin-top: 1.8em; }
+.response-time {
+  font-family: "Hina Mincho", serif;
+  opacity: 0.75;
+  margin-top: 1em;
+}
+.deposit {
+  border-top: 1px solid rgba(255, 255, 230, 0.25);
+  padding-top: 1.5em;
+  margin-top: 3em;
+  font-size: 0.95em;
+  line-height: 1.7;
+}
