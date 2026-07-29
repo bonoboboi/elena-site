@@ -76,6 +76,16 @@ content:
             required: true
             options:
               media: images
+          - name: subject
+            label: Subject
+            type: string
+            description: Must match one of the subjects under "About, CV & Contact" exactly, e.g. Portrait, Pet portrait. Leave empty to show this only in the scrolling gallery.
+          - name: technique
+            label: Technique
+            type: select
+            options:
+              values: [Oil, Oil pastel, Graphite, Ink, Mixed technique]
+            description: Picking a technique on the page swaps the subject pictures to an example tagged with it.
           - name: details
             label: Size, medium, year
             type: string
@@ -140,6 +150,16 @@ content:
             options:
               media: images
             description: Shown as the button. Leave empty and a dashed outline appears instead.
+      - name: commission_techniques
+        label: "Commissions: techniques to choose from"
+        type: object
+        list: true
+        description: "The list the visitor picks from. If you add one here, tell your developer so it can be added to the Technique dropdown on examples too."
+        fields:
+          - name: label
+            label: Name
+            type: string
+            required: true
       - name: commission_sizes
         label: "Commissions: sizes and prices"
         type: object

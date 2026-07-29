@@ -92,18 +92,32 @@ permalink: /order/
         <legend>Subject</legend>
         <div class="subject-cards">
           {% for s in site.commission_subjects %}
-          <label class="subject">
+          <label class="subject" data-subject="{{ s.label }}">
             <input type="radio" name="subject" value="{{ s.label }}"{% if loop.first %} checked{% endif %}>
-            {% if s.image %}
-            <img src="{{ s.image }}" alt="" loading="lazy">
-            {% else %}
-            <span class="subject-placeholder"></span>
-            {% endif %}
+            <img src="{{ s.image }}" data-default="{{ s.image }}" alt="" loading="lazy"{% if not s.image %} hidden{% endif %}>
+            <span class="subject-placeholder"{% if s.image %} hidden{% endif %}></span>
             <span class="subject-label">{{ s.label }}</span>
           </label>
           {% endfor %}
         </div>
       </fieldset>
+
+      <fieldset class="techniques">
+        <legend>Technique</legend>
+        <div class="technique-list">
+          {% for t in site.commission_techniques %}
+          <label class="technique">
+            <input type="radio" name="technique" value="{{ t.label }}"{% if loop.first %} checked{% endif %}>
+            <span>{{ t.label }}</span>
+          </label>
+          {% endfor %}
+        </div>
+      </fieldset>
+
+      {# every tagged example, so the subject pictures can swap when a technique is picked #}
+      <script type="application/json" id="examples">
+        {{ commissions.items | dump | safe }}
+      </script>
 
       <label for="details">What do you have in mind? *</label>
       <textarea id="details" name="details" rows="6" required placeholder="The subject, who it is for, where it will hang, any timing that matters."></textarea>
@@ -167,6 +181,31 @@ permalink: /order/
       requestAnimationFrame(drift);
     }
     requestAnimationFrame(drift);
+  }
+
+  // Picking a technique repaints the subject pictures with an example in that
+  // technique, falling back to the subject's own picture when she hasn't made one yet.
+  const examplesEl = document.getElementById('examples');
+  if (examplesEl) {
+    const examples = JSON.parse(examplesEl.textContent);
+    const cards = document.querySelectorAll('.subject[data-subject]');
+
+    function paintSubjects() {
+      const t = document.querySelector('input[name="technique"]:checked');
+      cards.forEach(card => {
+        const match = examples.find(e =>
+          e.image && e.subject === card.dataset.subject && (!t || e.technique === t.value));
+        const img = card.querySelector('img');
+        const src = match ? match.image : img.dataset.default;
+        img.src = src || '';
+        img.hidden = !src;
+        card.querySelector('.subject-placeholder').hidden = !!src;
+      });
+    }
+
+    document.querySelectorAll('input[name="technique"]')
+      .forEach(r => r.addEventListener('change', paintSubjects));
+    paintSubjects();
   }
 
   // Sending the form redirects to the Stripe link for the chosen size, so one button
