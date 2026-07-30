@@ -15,8 +15,8 @@ permalink: /order/
   <p class="price-floor">{{ site.commission_price_line }}</p>
 
   {% if commissions.items.length %}
-  {# drifts on its own, still draggable. The list is rendered twice so the wrap at the
-     halfway point is invisible; the second copy is hidden from screen readers. #}
+  {# rendered once; the script clones the set only when it overflows, because a set that
+     already fits on screen would show its own duplicate #}
   <section class="samples">
     <div class="samples-head">
       <h2>Painted to order</h2>
@@ -25,16 +25,14 @@ permalink: /order/
       <button type="button" class="strip-pause" id="strip-pause" hidden aria-pressed="false">Pause</button>
     </div>
     <div class="sample-strip" id="sample-strip">
-      {% for pass in [1, 2] %}
       {% for c in commissions.items %}
-      <figure class="sample"{% if pass == 2 %} aria-hidden="true"{% endif %}>
+      <figure class="sample">
         <img src="{{ c.image }}" alt="{{ c.name }}" loading="lazy">
         <figcaption>
           <strong>{{ c.name }}</strong>
           {% if c.details %}<span>{{ c.details }}</span>{% endif %}
         </figcaption>
       </figure>
-      {% endfor %}
       {% endfor %}
     </div>
   </section>
@@ -167,13 +165,16 @@ permalink: /order/
 <p><a href="/" class="mincho-link">&larr; Back to Portfolio</a></p>
 
 <script>
-  // The strip drifts by itself. Halting on hover, touch or a held pointer means it
-  // never fights someone reading or dragging it.
+  // The strip drifts by itself, but only when the paintings are too wide to fit.
+  // A set that already fits is left alone: looping it would show its own duplicate.
   const strip = document.getElementById('sample-strip');
   const pauseBtn = document.getElementById('strip-pause');
   if (strip && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    const originals = [...strip.children];
     let hovered = false;
     let stopped = false;
+    let setWidth = 0;
+    let running = false;
     const paused = () => hovered || stopped;
     let last = null;
 
@@ -182,26 +183,65 @@ permalink: /order/
     ['pointerleave', 'pointerup', 'touchend'].forEach(e =>
       strip.addEventListener(e, () => { hovered = false; }, { passive: true }));
 
-    // only offered when the strip actually moves, so it never appears as dead chrome
-    pauseBtn.hidden = false;
     pauseBtn.addEventListener('click', () => {
       stopped = !stopped;
       pauseBtn.textContent = stopped ? 'Play' : 'Pause';
       pauseBtn.setAttribute('aria-pressed', String(stopped));
     });
 
+    // scrollWidth is useless here: the strip carries ~400px of full-bleed padding a
+    // side, so it always "overflows". Measure the paintings themselves instead.
+    function setStride() {
+      const gap = parseFloat(getComputedStyle(strip).gap) || 0;
+      const width = originals.reduce((sum, n) => sum + n.getBoundingClientRect().width, 0);
+      return width + gap * originals.length;
+    }
+
+    function setup() {
+      strip.querySelectorAll('[data-clone]').forEach(n => n.remove());
+      strip.scrollLeft = 0;
+      const inset = parseFloat(getComputedStyle(strip).paddingLeft) || 0;
+      setWidth = setStride();
+      // does the last painting actually run past the right edge of the screen?
+      running = inset + setWidth > strip.clientWidth + 1;
+      // clone until a full screen of paintings sits past the wrap point, so jumping
+      // back to the start never lands on a gap
+      if (running) {
+        let guard = 20;
+        while (strip.scrollWidth < setWidth + strip.clientWidth && guard--) {
+          originals.forEach(node => {
+            const copy = node.cloneNode(true);
+            copy.dataset.clone = '1';
+            copy.setAttribute('aria-hidden', 'true');
+            strip.append(copy);
+          });
+        }
+      }
+      pauseBtn.hidden = !running;
+    }
+
     function drift(now) {
-      if (last !== null && !paused() && document.visibilityState === 'visible') {
+      if (last !== null && running && !paused() && document.visibilityState === 'visible') {
         // 14px per second, slow enough to read past. The delta is capped because a
         // throttled tab hands back one huge frame and the strip would lurch.
         strip.scrollLeft += Math.min(now - last, 50) * 0.014;
-        // the two rendered copies are identical, so this wrap is invisible
-        const half = strip.scrollWidth / 2;
-        if (strip.scrollLeft >= half) strip.scrollLeft -= half;
+        if (strip.scrollLeft >= setWidth) strip.scrollLeft -= setWidth;
       }
       last = now;
       requestAnimationFrame(drift);
     }
+
+    // Observing the strip is useless: it stays full-width while its children overflow.
+    // The paintings themselves are what change, when their images finally load.
+    let settling = false;
+    const ro = new ResizeObserver(() => {
+      if (settling) return;
+      settling = true;
+      requestAnimationFrame(() => { setup(); settling = false; });
+    });
+    originals.forEach(node => ro.observe(node));
+    addEventListener('resize', setup);
+    setup();
     requestAnimationFrame(drift);
   }
 
